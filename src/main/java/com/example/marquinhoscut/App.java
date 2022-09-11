@@ -1,7 +1,9 @@
 package com.example.marquinhoscut;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,8 +22,11 @@ public class App extends Application {
 		stage.show();
 	}
 	
-	static void setRoot(String fxml) throws IOException {
-		scene.setRoot(createLoader(fxml).load());
+
+	
+	static Stage createStage (ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		return stage;
 	}
 	
 	private static Parent loadFXML(String fxml) throws IOException {

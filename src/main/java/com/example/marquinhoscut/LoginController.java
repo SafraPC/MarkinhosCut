@@ -13,13 +13,8 @@ import java.io.IOException;
 
 public class LoginController {
 	@FXML
-	private TextField passwordInput,loginInput;
-	@FXML
-	private Button submitButton;
-	
-	@FXML
 	protected void handleSubmit(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		Stage stage = App.createStage(event);
 		FXMLLoader root = App.createLoader("logged");
 		stage.setScene(new Scene(root.load()));
 		LoggedController controller = root.getController();
