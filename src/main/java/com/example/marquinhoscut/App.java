@@ -22,9 +22,7 @@ public class App extends Application {
 		stage.show();
 	}
 	
-
-	
-	static Stage createStage (ActionEvent event) throws IOException {
+	public static Stage createStage(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		return stage;
 	}
