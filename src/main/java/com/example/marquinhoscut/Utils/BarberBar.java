@@ -2,11 +2,15 @@ package com.example.marquinhoscut.Utils;
 
 import javafx.scene.control.Button;
 
+import java.util.Locale;
+
 public class BarberBar extends Bar{
 	
 	@Override
 	void navigate(String name) {
-		System.out.println(name);
+	 if(equalRoute(name,barberOptions.ADMINISTRADOR)){
+		
+	 }
 	}
 	
 	@Override
