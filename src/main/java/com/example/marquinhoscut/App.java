@@ -6,35 +6,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class App extends Application {
 	
-	static Scene scene;
-	
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("login"));
+		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("home.fxml"));
+		AnchorPane page = fxmlLoader.load();
+		Scene scene = new Scene(page);
 		stage.setScene(scene);
-		stage.setTitle("Tela de Login");
+		stage.setTitle("Bem-vindo!");
 		stage.show();
-	}
-	
-	public static Stage createStage(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		return stage;
-	}
-	
-	private static Parent loadFXML(String fxml) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-		return fxmlLoader.load();
-	}
-
-	public static FXMLLoader createLoader(String fxml) throws IOException{
-		FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml+".fxml"));
-		return loader;
 	}
 	
 	public static void main(String[] args) {
