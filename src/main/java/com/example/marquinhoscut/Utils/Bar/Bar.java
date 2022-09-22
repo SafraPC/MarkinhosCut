@@ -1,4 +1,4 @@
-package com.example.marquinhoscut.Utils;
+package com.example.marquinhoscut.Utils.Bar;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

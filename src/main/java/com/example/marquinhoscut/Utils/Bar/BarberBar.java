@@ -1,9 +1,9 @@
-package com.example.marquinhoscut.Utils;
+package com.example.marquinhoscut.Utils.Bar;
 import com.example.marquinhoscut.App;
+import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-
 import java.util.Optional;
 
 public class BarberBar extends Bar{
@@ -44,20 +44,11 @@ public class BarberBar extends Bar{
 		});
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
-			Alert dialogResult;
 			if(App.validateAdmPassword(result.get())){
-				System.out.println("logado");
-				dialogResult = new Alert(Alert.AlertType.INFORMATION);
-				dialogResult.setTitle("Sucesso");
-				dialogResult.setHeaderText("Bem-vindo!");
-				dialogResult.show();
+				new DialogMessage("Logado","Bem-vindo!", Alert.AlertType.INFORMATION);
 				return;
 			}
-			dialogResult = new Alert(Alert.AlertType.ERROR);
-			dialogResult.setTitle("Senha incorreta");
-			dialogResult.setHeaderText("Não foi possível realizar a autênticação.");
-			dialogResult.show();
-
+			new DialogMessage("Senha inválida","Senha incorreta!", Alert.AlertType.ERROR);
 		}
 	}
 }
