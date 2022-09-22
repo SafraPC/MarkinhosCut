@@ -11,12 +11,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+	private static String admPassword;
 	
 	@Override
 	public void start(Stage stage) throws IOException {
 		Scene scene = new Scene(loadFXML("home"));
 		stage.setScene(scene);
 		stage.setTitle("Bem-vindo!");
+		stage.setResizable(false);
 		stage.show();
 	}
 	
@@ -24,8 +26,15 @@ public class App extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();
 	}
-
+	
+	public static boolean validateAdmPassword(String password){
+	if(password.equals(admPassword)){
+		return true;
+	}
+	return false;
+	}
 	public static void main(String[] args) {
+		App.admPassword = args[0];
 		launch();
 	}
 	
