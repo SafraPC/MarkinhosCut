@@ -18,12 +18,12 @@ public class Home extends BarberBar {
 	private Pane paneContainer;
 	private Label paneLabel;
 	@FXML
-	void initialize() {ad
+	void initialize() {
 		try{
 
 			handleNavigationBar(buttonAdm);
 		
-			for (int i = 0; i < 2; i++) {
+			for (int i = 1; i < 3; i++) {
 				FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("testee.fxml"));
 				AnchorPane scene = fxmlLoader.load();
 				AnchorPane ap = scene;
@@ -32,9 +32,5 @@ public class Home extends BarberBar {
 		}catch (Exception e){
 		
 		}
-
-		
-		
 	}
-
 }

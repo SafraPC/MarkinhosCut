@@ -6,20 +6,24 @@ import javafx.scene.layout.Pane;
 
 public abstract class Bar {
 	
-	public enum adminOptions{
-	SAIR,PROFISSIONAIS,SERVIÇOS,RESULTADOS;
+	protected enum adminOptions{
+	EXIT("Sair"),EMPLOYEES("Profissionais"),SERVICES("Serviços"),RESULTS("Resultados");
+		
+		public final String label;
+		
+		adminOptions(String label) {
+			this.label = label;
+		}
 	}
 	
-	public enum barberOptions{
-		ADMINISTRADOR
-	}
-	
-	public Boolean equalRoute(String name,adminOptions option){
-		return name.toUpperCase().equals(option.toString());
-	}
-	
-	public Boolean equalRoute(String name,barberOptions option){
-		return name.toUpperCase().equals(option.toString());
+	protected enum barberOptions{
+		ADM("Administrador");
+		
+		public final String label;
+		
+		barberOptions(String label) {
+			this.label = label;
+		}
 	}
 	
 	abstract void navigate(String name);

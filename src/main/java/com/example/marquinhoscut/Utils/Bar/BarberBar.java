@@ -10,7 +10,7 @@ public class BarberBar extends Bar{
 	
 	@Override
 	void navigate(String name) {
-	 if(equalRoute(name,barberOptions.ADMINISTRADOR)){
+	 if(name.equals(barberOptions.ADM.label)){
 		 admPressed();
 	 }
 	}
