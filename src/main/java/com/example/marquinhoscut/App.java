@@ -34,8 +34,15 @@ public class App extends Application {
 	return false;
 	}
 	public static void main(String[] args) {
-		App.admPassword = args[0];
-		launch();
+		try{
+			App.admPassword = args[0];
+			launch();
+		}catch (Exception err){
+			if(args.length == 0){
+				System.out.println("Crie um argumento com a senha do adm.");
+			}
+		}
+	
 	}
 	
 }
