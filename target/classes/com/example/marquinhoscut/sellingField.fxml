@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="142.0" prefWidth="636.0" style="-fx-background-color: # ede8e8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
+   <effect>
+      <Blend />
+   </effect>
+   <children>
+      <ChoiceBox layoutX="20.0" layoutY="64.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <Label layoutX="24.0" layoutY="35.0" opacity="0.8" text="Serviço">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="34.0" opacity="0.8" text="Preço">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="224.0" layoutY="63.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <Label layoutX="425.0" layoutY="34.0" opacity="0.8" text="Quantidade">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="425.0" layoutY="63.0" prefHeight="35.0" prefWidth="136.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <Button layoutX="359.0" layoutY="63.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="21.0">
+               <image>
+                  <Image url="@../../../Assets/edit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="577.0" layoutY="59.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="20.0" style="-fx-background-color: red;" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../../../Assets/trash.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

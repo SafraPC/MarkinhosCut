@@ -8,46 +8,60 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: ede8e8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
+<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
    <effect>
       <Blend />
    </effect>
    <children>
-      <Pane fx:id="navigationBar" layoutY="-1.0" prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: D9D9D9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="navigationBar" layoutY="-1.0" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: D9D9D9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="buttonAdm" layoutX="681.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Administrador">
+            <Button fx:id="buttonAdm" layoutX="581.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Administrador">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
          </children>
       </Pane>
-      <ScrollPane layoutY="50.0" prefHeight="753.0" prefWidth="800.0">
+      <AnchorPane layoutY="50.0" prefHeight="220.0" prefWidth="715.0">
+         <children>
+            <ChoiceBox layoutX="26.0" layoutY="51.0" prefHeight="35.0" prefWidth="318.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <Label layoutX="30.0" layoutY="25.0" opacity="0.8" text="Barbeiro">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="382.0" layoutY="25.0" opacity="0.8" text="Data">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="382.0" layoutY="51.0" prefHeight="35.0" prefWidth="304.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <ChoiceBox layoutX="30.0" layoutY="145.0" prefHeight="35.0" prefWidth="659.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <Label layoutX="34.0" layoutY="116.0" opacity="0.8" text="Método de pagamento">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ScrollPane layoutY="270.0" prefHeight="375.0" prefWidth="715.0" style="-fx-border-color: white; -fx-background-color: white;">
          <content>
-            <GridPane fx:id="gridPane" prefWidth="800.0">
-               <children>
-                  <AnchorPane prefHeight="116.0" prefWidth="800.0">
-                     <children>
-                        <ChoiceBox layoutX="23.0" layoutY="54.0" prefHeight="34.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-                        <Label layoutX="23.0" layoutY="25.0" opacity="0.8" text="Barbeiro">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="413.0" layoutY="25.0" opacity="0.8" text="Data">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <DatePicker layoutX="413.0" layoutY="54.0" prefHeight="34.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-                     </children>
-                  </AnchorPane>
-               </children></GridPane>
+            <GridPane fx:id="gridPane" prefWidth="690.0">
+               <columnConstraints>
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
          </content>
       </ScrollPane>
+      <Button layoutX="310.0" layoutY="667.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #03AA00; -fx-border-radius: 15px;" text="Confirmar" textFill="WHITE" />
    </children>
 </AnchorPane>

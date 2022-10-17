@@ -45,10 +45,10 @@ public class BarberBar extends Bar{
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			if(App.validateAdmPassword(result.get())){
-				new DialogMessage("Logado","Bem-vindo!", Alert.AlertType.INFORMATION);
+				DialogMessage.show("Logado","Bem-vindo!", Alert.AlertType.INFORMATION);
 				return;
 			}
-			new DialogMessage("Senha inválida","Senha incorreta!", Alert.AlertType.ERROR);
+			DialogMessage.show("Senha inválida","Senha incorreta!", Alert.AlertType.ERROR);
 		}
 	}
 }
