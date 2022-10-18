@@ -62,11 +62,11 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button layoutX="324.0" layoutY="698.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #03AA00; -fx-border-radius: 15px;" text="Confirmar" textFill="WHITE">
+      <Button layoutX="324.0" layoutY="698.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #03AA00; -fx-border-radius: 15px;" text="Confirmar" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="324.0" layoutY="647.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: gray; -fx-border-radius: 15px;" text="+" textFill="WHITE">
+      <Button layoutX="324.0" layoutY="647.0" mnemonicParsing="false" onAction="#handleAddNewSection" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: gray; -fx-border-radius: 15px;" text="+" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
