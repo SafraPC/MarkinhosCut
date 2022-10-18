@@ -14,45 +14,45 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
+<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
    <effect>
       <Blend />
    </effect>
    <children>
       <Pane fx:id="navigationBar" layoutY="-1.0" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: D9D9D9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="buttonAdm" layoutX="581.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Administrador">
+            <Button fx:id="buttonAdm" layoutX="631.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Administrador">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
          </children>
       </Pane>
-      <AnchorPane layoutY="50.0" prefHeight="220.0" prefWidth="715.0">
+      <AnchorPane layoutY="50.0" prefHeight="220.0" prefWidth="750.0">
          <children>
-            <ChoiceBox layoutX="26.0" layoutY="51.0" prefHeight="35.0" prefWidth="318.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-            <Label layoutX="30.0" layoutY="25.0" opacity="0.8" text="Barbeiro">
+            <ChoiceBox layoutX="36.0" layoutY="51.0" prefHeight="35.0" prefWidth="314.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <Label layoutX="39.0" layoutY="25.0" opacity="0.8" text="Barbeiro">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="382.0" layoutY="25.0" opacity="0.8" text="Data">
+            <Label layoutX="376.0" layoutY="25.0" opacity="0.8" text="Data">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker layoutX="382.0" layoutY="51.0" prefHeight="35.0" prefWidth="304.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-            <ChoiceBox layoutX="30.0" layoutY="145.0" prefHeight="35.0" prefWidth="659.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-            <Label layoutX="34.0" layoutY="116.0" opacity="0.8" text="Método de pagamento">
+            <DatePicker layoutX="374.0" layoutY="51.0" prefHeight="35.0" prefWidth="337.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <ChoiceBox layoutX="35.0" layoutY="145.0" prefHeight="35.0" prefWidth="675.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <Label layoutX="36.0" layoutY="116.0" opacity="0.8" text="Método de pagamento">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <ScrollPane layoutY="270.0" prefHeight="375.0" prefWidth="715.0" style="-fx-border-color: white; -fx-background-color: white;">
+      <ScrollPane layoutY="231.0" prefHeight="395.0" prefWidth="750.0" style="-fx-border-color: white; -fx-background-color: white;">
          <content>
-            <GridPane fx:id="gridPane" prefWidth="690.0">
+            <GridPane fx:id="gridPane" prefHeight="8.0" prefWidth="725.0" style="-fx-background-color: white;">
                <columnConstraints>
                   <ColumnConstraints />
                </columnConstraints>
@@ -62,6 +62,14 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button layoutX="310.0" layoutY="667.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #03AA00; -fx-border-radius: 15px;" text="Confirmar" textFill="WHITE" />
+      <Button layoutX="324.0" layoutY="698.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #03AA00; -fx-border-radius: 15px;" text="Confirmar" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="324.0" layoutY="647.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: gray; -fx-border-radius: 15px;" text="+" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

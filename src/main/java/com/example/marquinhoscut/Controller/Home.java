@@ -18,7 +18,7 @@ public class Home extends BarberBar {
 
 			handleNavigationBar(buttonAdm);
 		
-			for (int i = 1; i < 5; i++) {
+			for (int i = 1; i < 20; i++) {
 				FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("sellingField.fxml"));
 				AnchorPane scene = fxmlLoader.load();
 				AnchorPane ap = scene;
