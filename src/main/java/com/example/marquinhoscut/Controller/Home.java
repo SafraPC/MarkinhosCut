@@ -21,41 +21,23 @@ public class Home extends BarberBar {
 	Button buttonAdm;
 	@FXML
 	private GridPane gridPane;
-	private int lastGridIndex = 1;
 	
 	private ArrayList<TextField> fieldList = new ArrayList();
-	
-	
-	private void handleDeleteRow(AnchorPane ap){
-		try{
-			int index = gridPane.getRowIndex(ap);
-			gridPane.getChildren().remove(index-1);
-			lastGridIndex--;
-			System.out.println("--");
-			System.out.println(index);
-			System.out.println(lastGridIndex);
-		}catch(Exception err){
-			System.out.println(err);
-		}
-	
-	}
-	
+
 	@FXML
 	private void handleAddNewSection() {
 		try{
-			System.out.println(lastGridIndex);
+			
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("sellingField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
 			
 			fieldList.add(((TextField)ap.getChildren().get(3)));
-			
 			((Button)ap.getChildren().get(7)).setOnAction(buttonEvent -> {
-				handleDeleteRow(ap);
+				
+				gridPane.getChildren().remove(ap);
 			});
-
-			gridPane.add(ap, 0, lastGridIndex);
-			lastGridIndex++;
+			gridPane.add(ap, 0, gridPane.getRowCount());
 		}catch(Exception e){
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
 		}
