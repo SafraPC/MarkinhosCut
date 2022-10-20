@@ -30,7 +30,7 @@
       </Pane>
       <AnchorPane layoutY="50.0" prefHeight="220.0" prefWidth="750.0">
          <children>
-            <ChoiceBox layoutX="36.0" layoutY="51.0" prefHeight="35.0" prefWidth="314.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <ChoiceBox fx:id="CBbarber" layoutX="35.0" layoutY="51.0" prefHeight="35.0" prefWidth="314.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
             <Label layoutX="39.0" layoutY="25.0" opacity="0.8" text="Barbeiro">
                <font>
                   <Font size="14.0" />
@@ -41,8 +41,8 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker layoutX="374.0" layoutY="51.0" prefHeight="35.0" prefWidth="337.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-            <ChoiceBox layoutX="35.0" layoutY="145.0" prefHeight="35.0" prefWidth="675.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <DatePicker fx:id="datePicker" layoutX="374.0" layoutY="51.0" prefHeight="35.0" prefWidth="337.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+            <ChoiceBox fx:id="CBPaymentMethod" layoutX="35.0" layoutY="145.0" prefHeight="35.0" prefWidth="675.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
             <Label layoutX="36.0" layoutY="116.0" opacity="0.8" text="Método de pagamento">
                <font>
                   <Font size="14.0" />
@@ -71,5 +71,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label layoutX="35.0" layoutY="637.0" opacity="0.8" text="Receber: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="107.0" layoutY="637.0" opacity="0.8">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="toReceive" layoutX="107.0" layoutY="637.0" opacity="0.8" prefHeight="14.0" prefWidth="57.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

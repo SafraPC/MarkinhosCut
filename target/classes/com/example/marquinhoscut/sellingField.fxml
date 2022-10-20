@@ -16,7 +16,7 @@
       <Blend />
    </effect>
    <children>
-      <ChoiceBox layoutX="32.0" layoutY="64.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <ChoiceBox fx:id="CBservice" layoutX="32.0" layoutY="64.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="33.0" layoutY="35.0" opacity="0.8" text="Serviço">
          <font>
             <Font size="14.0" />
@@ -40,8 +40,14 @@
                <image>
                   <Image url="@../../../Assets/edit.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button layoutX="651.0" layoutY="52.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: red;" textFill="WHITE">
          <font>
