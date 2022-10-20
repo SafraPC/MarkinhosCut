@@ -10,23 +10,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 public class Home extends BarberBar {
-	@FXML
-	private
-	Button buttonAdm;
-	@FXML
-	private GridPane gridPane;
 	
+	private String[] barbers = {
+			"Leandro",
+			"Rhuan",
+			"Marcelo"
+	};
+	private String[] payments = {
+			"Cartão de Crédito",
+			"Dinheiro",
+			"Pix",
+			"Débito"
+	};
 	private ArrayList<TextField> fieldList = new ArrayList();
 	private ArrayList<String> listBarber =  new ArrayList();
-	private ObservableList<String> observablelistBarber;
+	private ObservableList<String> observablelistBarber,observablelistPaymentMethod;
 	private ArrayList<String> listPaymentMethod =  new ArrayList();
-	private ObservableList<String> observablelistPaymentMethod;
+	
+	
+	@FXML
+	private Button buttonAdm;
+	@FXML
+	private GridPane gridPane;
 	@FXML
 	private DatePicker datePicker;
 	@FXML
@@ -43,14 +53,12 @@ public class Home extends BarberBar {
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("sellingField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
-
+			SellingField controller = fxmlLoader.getController();
+			controller.setGridParent(gridPane);
 			
 			fieldList.add(((TextField)ap.getChildren().get(3)));
-			((Button)ap.getChildren().get(7)).setOnAction(buttonEvent -> {
-				
-				gridPane.getChildren().remove(ap);
-			});
 			gridPane.add(ap, 0, gridPane.getRowCount());
+			
 		}catch(Exception e){
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
 		}
@@ -64,16 +72,15 @@ public class Home extends BarberBar {
 	}
 	@FXML
 	void loadChoiceBox() {
-		listBarber.add("Marcelo");
-		listBarber.add("Rhuan");
-		listBarber.add("Marcos");
-		listBarber.add("Leadrin");
+		for(String barber : barbers ){
+			listBarber.add(barber);
+		}
+		for(String payment : payments ){
+			listPaymentMethod.add(payment);
+		}
 		observablelistBarber = FXCollections.observableArrayList(listBarber);
 		CBbarber.setItems(observablelistBarber);
-		listPaymentMethod.add("Cartão de Crédito");
-		listPaymentMethod.add("Dinheiro");
-		listPaymentMethod.add("Pix");
-		listPaymentMethod.add("Debito");
+	
 		observablelistPaymentMethod = FXCollections.observableArrayList(listPaymentMethod);
 		CBPaymentMethod.setItems(observablelistPaymentMethod);
 	}

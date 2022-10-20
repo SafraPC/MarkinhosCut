@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="125.0" prefWidth="747.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
+<AnchorPane fx:id="anchorId" prefHeight="125.0" prefWidth="747.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.SellingField">
    <effect>
       <Blend />
    </effect>
@@ -49,7 +49,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="651.0" layoutY="52.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: red;" textFill="WHITE">
+      <Button layoutX="651.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: red;" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
