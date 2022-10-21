@@ -1,5 +1,6 @@
 package com.example.marquinhoscut.Controller;
 import com.example.marquinhoscut.App;
+import com.example.marquinhoscut.Components.SellingField;
 import com.example.marquinhoscut.Utils.Bar.BarberBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.collections.FXCollections;
@@ -27,10 +28,10 @@ public class Home extends BarberBar {
 			"Pix",
 			"Débito"
 	};
-	private ArrayList<TextField> fieldList = new ArrayList();
 	private ArrayList<String> listBarber =  new ArrayList();
 	private ObservableList<String> observablelistBarber,observablelistPaymentMethod;
 	private ArrayList<String> listPaymentMethod =  new ArrayList();
+	private ArrayList<SellingField> controllers = new ArrayList();
 	
 	
 	@FXML
@@ -43,8 +44,7 @@ public class Home extends BarberBar {
 	private ChoiceBox<String> CBbarber;
 	@FXML
 	private ChoiceBox<String> CBPaymentMethod;
-	@FXML
-	private ChoiceBox<String> CBservice;
+	
 
 	@FXML
 	private void handleAddNewSection() {
@@ -54,9 +54,8 @@ public class Home extends BarberBar {
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
 			SellingField controller = fxmlLoader.getController();
-			controller.setGridParent(gridPane);
-			
-			fieldList.add(((TextField)ap.getChildren().get(3)));
+			controller.setGridParent(gridPane,controllers);
+			controllers.add(controller);
 			gridPane.add(ap, 0, gridPane.getRowCount());
 			
 		}catch(Exception e){
@@ -64,10 +63,26 @@ public class Home extends BarberBar {
 		}
 	}
 	
+	
+	private boolean isFormValid(){
+		try{
+			for(SellingField fields: controllers){
+				if(Integer.parseInt(fields.getQtdField().getText()) <= 0){
+					System.out.println("A quantidade tem que ser maior que 0");
+					return false;
+				}
+			}
+		}catch (Exception err){
+			System.out.println(err.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
 	@FXML
-	void handleSubmit(ActionEvent event) {
-		for(TextField arg: fieldList){
-			System.out.println(arg.getText());
+	void handleSubmit() {
+		if(isFormValid()){
+			System.out.println("deu certo");
 		}
 	}
 	@FXML

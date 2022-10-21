@@ -9,5 +9,7 @@ module com.example.marquinhoscut {
 	exports com.example.marquinhoscut;
 	exports com.example.marquinhoscut.Controller;
 	opens com.example.marquinhoscut.Controller to javafx.fxml;
-
+	exports com.example.marquinhoscut.Components;
+	opens com.example.marquinhoscut.Components to javafx.fxml;
+	
 }
