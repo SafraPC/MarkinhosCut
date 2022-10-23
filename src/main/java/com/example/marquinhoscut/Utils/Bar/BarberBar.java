@@ -52,13 +52,12 @@ public class BarberBar extends Bar{
 		if (result.isPresent()) {
 			if(App.validateAdmPassword(result.get())){
 				try{
-					DialogMessage.show("Logado","Bem-vindo!", Alert.AlertType.INFORMATION);
 					Stage stage = (Stage) buttonScene.getScene().getWindow();
-					FXMLLoader loader = new FXMLLoader(App.class.getResource("services.fxml"));
+					FXMLLoader loader = new FXMLLoader(App.class.getResource("professionals.fxml"));
 					AnchorPane anchorPane = loader.load();
 					Scene scene = new Scene(anchorPane);
-					
 					stage.setScene(scene);
+					stage.setTitle("Profissionais");
 					stage.show();
 
 				}catch(Exception ex){

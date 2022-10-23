@@ -86,14 +86,12 @@ public class Home extends BarberBar {
 	}
 	@FXML
 	void loadChoiceBox() {
-		
 		for(String barber : barbers ){
 			listBarber.add(barber);
 		}
 		for(String payment : payments ){
 			listPaymentMethod.add(payment);
 		}
-		
 		observablelistBarber = FXCollections.observableArrayList(listBarber);
 		CBbarber.setItems(observablelistBarber);
 	

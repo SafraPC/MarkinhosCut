@@ -4,11 +4,7 @@ import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class Services extends AdminBar {
-	public Services(){
-	
-	}
-	
+public class Results extends AdminBar {
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
 	

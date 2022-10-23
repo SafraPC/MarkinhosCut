@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Results">
+    <children>
+        <Pane fx:id="navigationBarResults" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: D9D9D9;">
+            <children>
+                <Button fx:id="exitButton" layoutX="581.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Sair">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="professionalButton" layoutX="-4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Profissionais">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="servicesButton" layoutX="113.0" layoutY="-1.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Serviços">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="resultsButton" layoutX="228.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Resultados">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

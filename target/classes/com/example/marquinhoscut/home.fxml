@@ -14,12 +14,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
+<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
    <effect>
       <Blend />
    </effect>
    <children>
-      <Pane fx:id="navigationBar" layoutY="-1.0" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: D9D9D9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutY="-1.0" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: D9D9D9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button fx:id="buttonAdm" layoutX="631.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Administrador">
                <cursor>
