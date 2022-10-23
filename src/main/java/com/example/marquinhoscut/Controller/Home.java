@@ -5,7 +5,6 @@ import com.example.marquinhoscut.Utils.Bar.BarberBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -87,12 +86,14 @@ public class Home extends BarberBar {
 	}
 	@FXML
 	void loadChoiceBox() {
+		
 		for(String barber : barbers ){
 			listBarber.add(barber);
 		}
 		for(String payment : payments ){
 			listPaymentMethod.add(payment);
 		}
+		
 		observablelistBarber = FXCollections.observableArrayList(listBarber);
 		CBbarber.setItems(observablelistBarber);
 	

@@ -26,7 +26,7 @@ public abstract class Bar {
 		}
 	}
 	
-	abstract void navigate(String name);
+	abstract void navigate(String name, Button scene);
 	
 	abstract void handleNavigationBar(Button...args);
 

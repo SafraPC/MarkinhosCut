@@ -6,7 +6,7 @@ public class AdminBar extends Bar{
 	
 	
 	@Override
-	void navigate(String name) {
+	void navigate(String name, Button scene) {
 	
 	}
 	
