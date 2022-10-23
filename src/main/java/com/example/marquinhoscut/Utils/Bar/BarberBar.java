@@ -3,7 +3,6 @@ import com.example.marquinhoscut.App;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
