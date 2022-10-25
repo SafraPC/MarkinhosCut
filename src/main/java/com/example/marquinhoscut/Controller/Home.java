@@ -53,6 +53,7 @@ public class Home extends BarberBar {
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
 			SellingField controller = fxmlLoader.getController();
+			controller.loadChoiceBox();
 			controller.setGridParent(gridPane,controllers);
 			controllers.add(controller);
 			gridPane.add(ap, 0, gridPane.getRowCount());
