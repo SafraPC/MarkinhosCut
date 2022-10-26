@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Services">
+<AnchorPane prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Services">
    <children>
-      <Pane fx:id="navigationBarServices" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: D9D9D9;">
+      <Pane fx:id="navigationBarServices" prefHeight="50.0" prefWidth="750.0" style="-fx-background-color: D9D9D9;">
          <children>
-            <Button fx:id="exitButton" layoutX="581.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Sair">
+            <Button fx:id="exitButton" layoutX="631.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Sair">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
