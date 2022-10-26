@@ -39,14 +39,20 @@ public class SellingField {
 		observablelistServices = FXCollections.observableArrayList(listServices);
 		serviceCB.setItems(observablelistServices);
 	}
-	public void setGridParent(GridPane pane, ArrayList<SellingField> controllers){
-		this.gridParent = pane;
-		this.controllers = controllers;
+	
+	@FXML
+	private void initialize(){
+		loadChoiceBox();
 	}
 	
 	public void handleDelete() {
 		this.gridParent.getChildren().remove(anchorId);
 		this.controllers.remove(this);
+	}
+	
+	public void setGridParent(GridPane pane, ArrayList<SellingField> controllers){
+		this.gridParent = pane;
+		this.controllers = controllers;
 	}
 	
 	public TextField getQtdField(){
