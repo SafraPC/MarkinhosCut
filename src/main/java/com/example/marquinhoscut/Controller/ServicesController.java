@@ -4,8 +4,8 @@ import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class Services extends AdminBar {
-	public Services(){
+public class ServicesController extends AdminBar {
+	public ServicesController(){
 	
 	}
 	

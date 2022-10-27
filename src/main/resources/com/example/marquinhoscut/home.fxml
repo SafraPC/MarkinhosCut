@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.Home">
+<AnchorPane prefHeight="750.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.HomeController">
    <effect>
       <Blend />
    </effect>
@@ -50,7 +50,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <ScrollPane layoutY="231.0" prefHeight="395.0" prefWidth="750.0" style="-fx-border-color: white; -fx-background-color: white;">
+      <ScrollPane fitToWidth="true" layoutY="231.0" prefHeight="395.0" prefWidth="750.0" style="-fx-border-color: white; -fx-background-color: white;">
          <content>
             <GridPane fx:id="gridPane" prefHeight="391.0" prefWidth="733.0" style="-fx-background-color: white; -fx-grid-lines-visible: white;">
                <columnConstraints>

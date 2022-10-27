@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -12,22 +13,69 @@ import java.util.ArrayList;
 
 public class ProfessionalField {
 	
-	@FXML
-	private AnchorPane anchorId;
+	private String name,cpf;
+	private boolean isEditing = false;
+	
 	
 	@FXML
-	private TextField qtdField;
-	
+	private TextField nameField,cpfField;
 	@FXML
-	private TextField qtdField1;
+	private Button deleteButton,editButton;
 	
+	
+
 	@FXML
-	void handleDelete(ActionEvent event) {
-	
+	void handleDelete() {
+		if(isEditing){
+			deleteButton.setText("Inativar");
+			editButton.setText("Editar");
+			
+			nameField.setText(name);
+			cpfField.setText(cpf);
+			handleInputs(true);
+			isEditing = false;
+		}
 	}
 	
 	@FXML
-	void handleEdit(ActionEvent event) {
-	
+	void handleEdit() {
+		if(isEditing){
+			deleteButton.setText("Inativar");
+			editButton.setText("Editar");
+			handleInputs(true);
+			isEditing = false;
+			setCpf(cpfField.getText());
+			setName(nameField.getText());
+			return;
+		}
+		isEditing = true;
+		handleInputs(false);
+		editButton.setText("Salvar");
+		deleteButton.setText("Cancelar");
 	}
+	
+	private void handleInputs(boolean active){
+		cpfField.setDisable(active);
+		nameField.setDisable(active);
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+		this.nameField.setText(name);
+	}
+	
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+		this.cpfField.setText(cpf);
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	
 }

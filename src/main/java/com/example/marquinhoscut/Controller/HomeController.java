@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class Home extends BarberBar {
+public class HomeController extends BarberBar {
 	
 	private String[] barbers = {
 			"Leandro",
