@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -43,6 +45,8 @@ public class HomeController extends BarberBar {
 	private ChoiceBox<String> CBbarber;
 	@FXML
 	private ChoiceBox<String> CBPaymentMethod;
+	@FXML
+	private Label toReceive;
 	
 
 	@FXML
@@ -66,10 +70,20 @@ public class HomeController extends BarberBar {
 	private boolean isFormValid(){
 		try{
 			for(SellingField fields: controllers){
-				if(Integer.parseInt(fields.getQtdField().getText()) <= 0){
-					System.out.println("A quantidade tem que ser maior que 0");
+				if( Integer.parseInt(fields.getQtdField().getText()) <= 0 ){
+					System.out.println("Preencha corretamente o campo, Valor deve ser maior que 0.");
+					return false;
+				}else if (fields.getServiceCB().getSelectionModel().isEmpty()) {
+					System.out.println("Preencha corretamente o campo Serviço.");
+					return false;
+				} else if (CBbarber.getSelectionModel().isEmpty()) {
+					System.out.println("Preencha corretamente o campo Barbeiro.");
+					return false;
+				}else if (CBPaymentMethod.getSelectionModel().isEmpty()) {
+					System.out.println("Preencha corretamente o campo Método de Pagamento.");
 					return false;
 				}
+
 			}
 		}catch (Exception err){
 			System.out.println(err.getMessage());
@@ -81,6 +95,7 @@ public class HomeController extends BarberBar {
 	@FXML
 	void handleSubmit() {
 		if(isFormValid()){
+			toReceive.setText(sumToReceive());
 			System.out.println("deu certo");
 		}
 	}
@@ -97,8 +112,19 @@ public class HomeController extends BarberBar {
 	
 		observablelistPaymentMethod = FXCollections.observableArrayList(listPaymentMethod);
 		CBPaymentMethod.setItems(observablelistPaymentMethod);
-	}
 
+
+	}
+	@FXML
+	public String sumToReceive() {
+		double valueService = 0;
+		for(SellingField fields: controllers){
+			 valueService += fields.toReceive(fields.getQtdField(),fields.getPriceField());
+		}
+		System.out.println(NumberFormat.getCurrencyInstance().format(valueService));
+		return NumberFormat.getCurrencyInstance().format(valueService);
+
+	}
 	@FXML
 	void initialize() {
 		try{

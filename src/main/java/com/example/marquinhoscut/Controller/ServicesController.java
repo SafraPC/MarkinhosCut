@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 public class ServicesController extends AdminBar {
 	public ServicesController(){
-	
+
 	}
 	
 	@FXML

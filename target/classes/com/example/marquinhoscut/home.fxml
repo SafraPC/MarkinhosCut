@@ -81,7 +81,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="toReceive" layoutX="107.0" layoutY="637.0" opacity="0.8" prefHeight="14.0" prefWidth="57.0">
+      <Label fx:id="toReceive" layoutX="92.0" layoutY="637.0" opacity="0.8" prefHeight="20.0" prefWidth="98.0" textFill="#25fc04">
          <font>
             <Font size="14.0" />
          </font>
