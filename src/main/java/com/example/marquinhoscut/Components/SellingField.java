@@ -71,6 +71,9 @@ public class SellingField {
 			priceField.setEditable(true);
 		}
 	}
+	public void getKeyboard(ActionEvent event){
+
+	}
 	public void getValue(ActionEvent event){
 		double valueService;
 		int index = serviceCB.getSelectionModel().getSelectedIndex();
