@@ -46,8 +46,8 @@ public class HomeController extends BarberBar {
 	@FXML
 	private ChoiceBox<String> CBPaymentMethod;
 	@FXML
-	private Label toReceive;
-	
+	public Label toReceive;
+
 
 	@FXML
 	private void handleAddNewSection() {

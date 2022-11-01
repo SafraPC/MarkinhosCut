@@ -50,7 +50,7 @@ public class ProfessionalsController extends AdminBar {
 		professionals.add(new Professional("Leandro","456544352",true));
 		professionals.add(new Professional("Marcelo","123151231",true));
 		professionals.add(new Professional("Rhuan","1231212",true));
-		professionals.add(new Professional("Frango","43213213",false));
+		professionals.add(new Professional("henrique","43213213",false));
 	}
 	
 	@FXML

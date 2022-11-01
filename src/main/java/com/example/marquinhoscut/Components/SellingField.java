@@ -86,11 +86,12 @@ public class SellingField {
 		double qtd = Double.parseDouble(qtdField.getText());
 		return qtd *price;
 	}
+
 	public void setGridParent(GridPane pane, ArrayList<SellingField> controllers){
 		this.gridParent = pane;
 		this.controllers = controllers;
 	}
-	
+
 	public TextField getQtdField(){
 		return qtdField;
 	}

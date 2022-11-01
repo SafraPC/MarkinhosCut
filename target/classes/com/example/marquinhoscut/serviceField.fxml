@@ -24,7 +24,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="nameServiceField" layoutX="33.0" layoutY="72.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <TextField fx:id="nameServiceField" disable="true" layoutX="33.0" layoutY="72.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
       <Button layoutX="369.0" layoutY="63.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -38,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="priceServiceField" layoutX="382.0" layoutY="72.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <TextField fx:id="priceServiceField" disable="true" layoutX="382.0" layoutY="72.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
       <Button fx:id="editButton" layoutX="163.0" layoutY="125.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #E7DE06;" text="Editar" textFill="WHITE">
          <font>
             <Font size="12.0" />
