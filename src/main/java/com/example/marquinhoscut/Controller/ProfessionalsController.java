@@ -48,9 +48,13 @@ public class ProfessionalsController extends AdminBar {
 	}
 	
 	public void populateProfessionals(){
-		ProfessionalDao pDao = new ProfessionalDao();
-		ArrayList<Professional> pList = pDao.getListProfessional();
-		professionals.addAll(pList);
+		try{
+			ProfessionalDao pDao = new ProfessionalDao();
+			professionals.addAll(pDao.getListProfessional());
+		}catch(Exception err){
+			System.out.println(err.getMessage());
+		}
+		
 	}
 	
 	@FXML
@@ -69,15 +73,15 @@ public class ProfessionalsController extends AdminBar {
 		gridPane.getChildren().clear();
 		ArrayList<Professional> filteredList = new ArrayList();
 		filteredList.addAll(professionals);
-		if(searchField.getText().length() >0){
+		if(searchField.getText().length() > 0){
 			filteredList.removeIf(item->
-					!item.getName().get().toLowerCase().contains(searchField.getText().toLowerCase()) &&
-					!item.getCpf().get().contains(searchField.getText()));
+					!item.getName().toLowerCase().contains(searchField.getText().toLowerCase()) &&
+					!item.getCpf().contains(searchField.getText()));
 		}
 		if(filteredList.size() > 0){
-			filteredList.sort((a,b)->a.getName().get().compareTo(b.getName().get()));
+			filteredList.sort((a,b)->a.getName().compareTo(b.getName()));
 			for (Professional professional : filteredList){
-				handleCreatePane(professional.getName().get(),professional.getCpf().get());
+				handleCreatePane(professional.getName(),professional.getCpf());
 			}
 		}
 	}

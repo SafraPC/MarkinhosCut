@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
-	private static String admPassword;
+	private static String admPassword,dbPassword;
 	
 	@Override
 	public void start(Stage stage) throws IOException {
@@ -33,14 +33,21 @@ public class App extends Application {
 	}
 	return false;
 	}
+	
+	public static String getDbPassword(){
+		return dbPassword;
+	}
 	public static void main(String[] args) {
 		try{
 			App.admPassword = args[0];
+			App.dbPassword = args[1];
 			launch();
 		}catch (Exception err){
 			if(args.length == 0){
 				System.out.println("Crie um argumento com a senha do adm.");
+				return;
 			}
+			System.out.println(err.getMessage());
 		}
 	
 	}

@@ -20,7 +20,6 @@ public class ServicesController extends AdminBar {
 	public ServicesController(){
 
 	}
-	
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
 	private boolean preventSearch = false;
@@ -34,7 +33,7 @@ public class ServicesController extends AdminBar {
 
 	private void handleCreatePane(String name, double priceService){
 		try{
-			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ServiceField.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("serviceField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
 			ServiceField controller = fxmlLoader.getController();
@@ -44,6 +43,7 @@ public class ServicesController extends AdminBar {
 			gridPane.add(ap, 0, gridPane.getRowCount());
 
 		}catch(Exception e){
+			System.out.println(e.getMessage());
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
 		}
 	}
