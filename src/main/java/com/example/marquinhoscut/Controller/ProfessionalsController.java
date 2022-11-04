@@ -2,6 +2,7 @@ package com.example.marquinhoscut.Controller;
 
 import com.example.marquinhoscut.App;
 import com.example.marquinhoscut.Components.ProfessionalField;
+import com.example.marquinhoscut.Dao.ProfessionalDao;
 import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
@@ -46,11 +47,10 @@ public class ProfessionalsController extends AdminBar {
 		}
 	}
 	
-	private void populateProfessionals(){
-		professionals.add(new Professional("Leandro","456544352",true));
-		professionals.add(new Professional("Marcelo","123151231",true));
-		professionals.add(new Professional("Rhuan","1231212",true));
-		professionals.add(new Professional("henrique","43213213",false));
+	public void populateProfessionals(){
+		ProfessionalDao pDao = new ProfessionalDao();
+		ArrayList<Professional> pList = pDao.getListProfessional();
+		professionals.addAll(pList);
 	}
 	
 	@FXML
@@ -71,13 +71,13 @@ public class ProfessionalsController extends AdminBar {
 		filteredList.addAll(professionals);
 		if(searchField.getText().length() >0){
 			filteredList.removeIf(item->
-					!item.getName().toLowerCase().contains(searchField.getText().toLowerCase()) &&
-					!item.getCpf().contains(searchField.getText()));
+					!item.getName().get().toLowerCase().contains(searchField.getText().toLowerCase()) &&
+					!item.getCpf().get().contains(searchField.getText()));
 		}
 		if(filteredList.size() > 0){
-			filteredList.sort((a,b)->a.getName().compareTo(b.getName()));
+			filteredList.sort((a,b)->a.getName().get().compareTo(b.getName().get()));
 			for (Professional professional : filteredList){
-				handleCreatePane(professional.getName(),professional.getCpf());
+				handleCreatePane(professional.getName().get(),professional.getCpf().get());
 			}
 		}
 	}

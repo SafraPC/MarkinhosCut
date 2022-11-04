@@ -1,37 +1,41 @@
 package com.example.marquinhoscut.Model;
-
+import javafx.beans.property.*;
 public class Professional {
-	private String name,cpf;
-	private boolean active;
+
+	private final StringProperty name,cpf;
+	private final BooleanProperty active;
+
 	
-	public Professional(String name, String cpf, boolean active){
+	public Professional(StringProperty name, StringProperty cpf, BooleanProperty active){
 		this.active = active;
 		this.cpf = cpf;
 		this.name = name;
 	}
-	
+	public Professional(String name, String cpf, boolean active){
+		this.active = new SimpleBooleanProperty(active);
+		this.cpf = new SimpleStringProperty(cpf);
+		this.name = new SimpleStringProperty(name);
+	}
 	public void setName(String name) {
-		this.name = name;
+		this.name.set(name);
 	}
 	
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+	public void setCpf(String cpf) { this.cpf.set(cpf);}
 	
 	public void setActive(boolean active) {
-		this.active = active;
+		this.active.set(active);
 	}
 	
 	
-	public String getName() {
+	public StringProperty getName() {
 		return name;
 	}
 	
-	public String getCpf() {
+	public StringProperty getCpf() {
 		return cpf;
 	}
 	
-	public boolean getActive(){
+	public BooleanProperty getActive(){
 		return active;
 	}
 	
