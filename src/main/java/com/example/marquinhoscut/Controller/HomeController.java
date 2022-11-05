@@ -1,6 +1,8 @@
 package com.example.marquinhoscut.Controller;
 import com.example.marquinhoscut.App;
 import com.example.marquinhoscut.Components.SellingField;
+import com.example.marquinhoscut.Dao.ProfessionalDao;
+import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Utils.Bar.BarberBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.collections.FXCollections;
@@ -29,10 +31,13 @@ public class HomeController extends BarberBar {
 			"Pix",
 			"Débito"
 	};
-	private ArrayList<String> listBarber =  new ArrayList();
-	private ObservableList<String> observablelistBarber,observablelistPaymentMethod;
+	private ArrayList<Professional> professionals =  new ArrayList();
+
+	private ObservableList<String> observablelistPaymentMethod;
 	private ArrayList<String> listPaymentMethod =  new ArrayList();
 	private ArrayList<SellingField> controllers = new ArrayList();
+
+	private ArrayList <String> professionalName = new ArrayList();
 	
 	
 	@FXML
@@ -101,14 +106,20 @@ public class HomeController extends BarberBar {
 	}
 	@FXML
 	void loadChoiceBox() {
-		for(String barber : barbers ){
-			listBarber.add(barber);
+
+		try{
+			ProfessionalDao pDao = new ProfessionalDao();
+			professionals.addAll(pDao.getListProfessional());
+		}catch(Exception err){
+			System.out.println(err.getMessage());
 		}
+		for(Professional professional : professionals ){
+			CBbarber.getItems().add(professional.getName());
+		}
+
 		for(String payment : payments ){
 			listPaymentMethod.add(payment);
 		}
-		observablelistBarber = FXCollections.observableArrayList(listBarber);
-		CBbarber.setItems(observablelistBarber);
 	
 		observablelistPaymentMethod = FXCollections.observableArrayList(listPaymentMethod);
 		CBPaymentMethod.setItems(observablelistPaymentMethod);

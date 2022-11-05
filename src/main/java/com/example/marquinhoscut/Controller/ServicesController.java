@@ -2,6 +2,8 @@ package com.example.marquinhoscut.Controller;
 
 import com.example.marquinhoscut.App;
 import com.example.marquinhoscut.Components.ServiceField;
+import com.example.marquinhoscut.Dao.ProfessionalDao;
+import com.example.marquinhoscut.Dao.ServiceDao;
 import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Model.Services;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
@@ -48,10 +50,13 @@ public class ServicesController extends AdminBar {
 		}
 	}
 	private void populateSevices(){
-		services.add(new Services("Corte",25,true));
-		services.add(new Services("Barba",30,true));
-		services.add(new Services("mechas",35,true));
-		services.add(new Services("sobrancelha",10,false));
+		try{
+			ServiceDao sDao = new ServiceDao();
+			services.addAll(sDao.getListServices());
+		}catch(Exception err){
+			System.out.println(err.getMessage());
+		}
+
 	}
 	@FXML
 	void initialize(){

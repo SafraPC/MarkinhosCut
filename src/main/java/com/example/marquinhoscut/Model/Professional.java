@@ -3,8 +3,7 @@ import javafx.beans.property.*;
 public class Professional {
 
 	private String name;
-	private
-	String cpf;
+	private String cpf;
 	private boolean active;
 
 	public Professional(String name, String cpf, boolean active){

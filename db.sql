@@ -49,6 +49,9 @@ insert into servico (preco, nome, ativo) values
 (20.0, "Barba", true),
 (35.0, "Mechas", false);
 
+insert into servico (preco, nome, ativo) values
+(50.0, "Progressiva", true);
+
 insert into registroServico (cpf, metodoPagamento, valorTotal, dataServico) values 
 ("48663164890", "Pix", 0, '2020-03-01');
 
@@ -59,4 +62,4 @@ insert into quantServico ( registroID, servicoId,quantidade) values
 SELECT registroServico.cpf, registroServico.metodoPagamento, quantServico.quantidade, registroServico.valorTotal 
 FROM registroServico INNER JOIN quantServico USING(registroID);
 
-SELECT * FROM Markinhos_cut.funcionario;
+SELECT * FROM Markinhos_cut.servico;

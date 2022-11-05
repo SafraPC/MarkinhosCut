@@ -1,4 +1,6 @@
 package com.example.marquinhoscut.Components;
+import com.example.marquinhoscut.Dao.ProfessionalDao;
+import com.example.marquinhoscut.Dao.ServiceDao;
 import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Model.Services;
 import javafx.collections.FXCollections;
@@ -38,14 +40,15 @@ public class SellingField {
 
 	@FXML
 	public void loadChoiceBox() {
+		try{
+			ServiceDao sDao = new ServiceDao();
+			listServices.addAll(sDao.getListServices());
+		}catch(Exception err){
+			System.out.println(err.getMessage());
+		}
 
-		listServices.add(new Services("Corte",25,true));
-		listServices.add(new Services("Sobracelha",10,true));
-		listServices.add(new Services("Barba",20,true));
-		listServices.add(new Services("Mechas",35,true));
-
-		for(int i=0; i< listServices.size(); i++){
-			serviceCB.getItems().add(listServices.get(i).getName());
+		for(Services service : listServices){
+			serviceCB.getItems().add(service.getName());
 		}
 		serviceCB.setTooltip(new Tooltip("Selecione um serviço"));
 //		observablelistServices = FXCollections.observableArrayList(listServices);
