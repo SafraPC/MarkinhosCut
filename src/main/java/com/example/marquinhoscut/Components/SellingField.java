@@ -7,28 +7,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 
 public class SellingField {
-	private String[] services = {
-			"Cabelo",
-			"Barba",
-			"Sobrancelha"
-	};
 	private ArrayList<Services> listServices =  new ArrayList();
-	private ObservableList<Services> observablelistServices;
 	private ArrayList<SellingField> controllers = new ArrayList();
 	private GridPane gridParent;
+	private Thread callback;
 
-	
 	@FXML
 	private AnchorPane anchorId;
 	
@@ -39,31 +37,57 @@ public class SellingField {
 	private ChoiceBox<String> serviceCB;
 
 	@FXML
+	private void initialize(){
+		loadChoiceBox();
+		priceField.setEditable(false);
+		serviceCB.setOnAction(event->{
+			getValue();
+			qtdField.setText("1");
+			this.getCallback();
+		});
+	}
+
+	@FXML
 	public void loadChoiceBox() {
 		try{
 			ServiceDao sDao = new ServiceDao();
 			listServices.addAll(sDao.getListServices());
+			for(Services service : listServices){
+				serviceCB.getItems().add(service.getName());
+			}
+			serviceCB.setTooltip(new Tooltip("Selecione um serviço"));
 		}catch(Exception err){
 			System.out.println(err.getMessage());
 		}
+	}
 
-		for(Services service : listServices){
-			serviceCB.getItems().add(service.getName());
-		}
-		serviceCB.setTooltip(new Tooltip("Selecione um serviço"));
-//		observablelistServices = FXCollections.observableArrayList(listServices);
-//		serviceCB.setItems(observablelistServices);
-	}
-	
 	@FXML
-	private void initialize(){
-		loadChoiceBox();
-		priceField.setEditable(false);
+	void onPriceChanged(KeyEvent event) {
+		this.getCallback();
 	}
-	
+
+	@FXML
+	void onQtdChanges(KeyEvent event) {
+		this.getCallback();
+	}
+	private void getCallback(){
+		try {
+			new Thread(()->{
+				this.callback.run();
+			}).run();
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
+	public void setParentCallback(Thread thread){
+		this.callback = thread;
+	}
+
 	public void handleDelete() {
 		this.gridParent.getChildren().remove(anchorId);
 		this.controllers.remove(this);
+		this.getCallback();
 	}
 
 	public void editValue(ActionEvent event){
@@ -77,13 +101,14 @@ public class SellingField {
 	public void getKeyboard(ActionEvent event){
 
 	}
-	public void getValue(ActionEvent event){
+	public void getValue(){
 		double valueService;
 		int index = serviceCB.getSelectionModel().getSelectedIndex();
 		valueService = listServices.get(index).getValue();
 		priceField.setText(Double.toString(valueService));
-
+		this.getCallback();
 	}
+
 	public double toReceive(TextField priceField,TextField qtdField){
 		double price = Double.parseDouble(priceField.getText());
 		double qtd = Double.parseDouble(qtdField.getText());
@@ -106,6 +131,5 @@ public class SellingField {
 	public ChoiceBox getServiceCB(){
 		return serviceCB;
 	}
-
 
 }

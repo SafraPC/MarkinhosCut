@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 
 public class HomeController extends BarberBar {
@@ -52,8 +53,6 @@ public class HomeController extends BarberBar {
 	private ChoiceBox<String> CBPaymentMethod;
 	@FXML
 	public Label toReceive;
-
-
 	@FXML
 	private void handleAddNewSection() {
 		try{
@@ -62,15 +61,16 @@ public class HomeController extends BarberBar {
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
 			SellingField controller = fxmlLoader.getController();
+			controller.setParentCallback( new Thread(()->toReceive.setText(sumToReceive())));
 			controller.setGridParent(gridPane,controllers);
 			controllers.add(controller);
 			gridPane.add(ap, 0, gridPane.getRowCount());
 			
 		}catch(Exception e){
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
+			System.out.println(e.getMessage());
 		}
 	}
-	
 	
 	private boolean isFormValid(){
 		try{
@@ -104,6 +104,9 @@ public class HomeController extends BarberBar {
 			System.out.println("deu certo");
 		}
 	}
+
+
+
 	@FXML
 	void loadChoiceBox() {
 
@@ -123,18 +126,21 @@ public class HomeController extends BarberBar {
 	
 		observablelistPaymentMethod = FXCollections.observableArrayList(listPaymentMethod);
 		CBPaymentMethod.setItems(observablelistPaymentMethod);
-
-
 	}
+
 	@FXML
 	public String sumToReceive() {
-		double valueService = 0;
-		for(SellingField fields: controllers){
-			 valueService += fields.toReceive(fields.getQtdField(),fields.getPriceField());
+		try{
+			double valueService = 0;
+			for(SellingField fields: controllers){
+				valueService += fields.toReceive(fields.getQtdField(),fields.getPriceField());
+			}
+			System.out.println(NumberFormat.getCurrencyInstance().format(valueService));
+			return NumberFormat.getCurrencyInstance().format(valueService);
+		}catch(Exception err){
+			System.out.println(err.getMessage());
+			return "";
 		}
-		System.out.println(NumberFormat.getCurrencyInstance().format(valueService));
-		return NumberFormat.getCurrencyInstance().format(valueService);
-
 	}
 	@FXML
 	void initialize() {
@@ -146,6 +152,4 @@ public class HomeController extends BarberBar {
 		}catch (Exception e){
 		}
 	}
-	
-	
 }

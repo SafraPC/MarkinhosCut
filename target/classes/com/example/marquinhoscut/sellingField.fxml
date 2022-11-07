@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorId" prefHeight="125.0" prefWidth="747.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Components.SellingField">
+<AnchorPane fx:id="anchorId" prefHeight="125.0" prefWidth="747.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Components.SellingField">
    <effect>
       <Blend />
    </effect>
    <children>
-      <ChoiceBox fx:id="serviceCB" layoutX="32.0" layoutY="64.0" onAction="#getValue" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <ChoiceBox fx:id="serviceCB" layoutX="32.0" layoutY="64.0"  prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="33.0" layoutY="35.0" opacity="0.8" text="Serviço">
          <font>
             <Font size="14.0" />
@@ -27,13 +27,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="priceField" layoutX="239.0" layoutY="63.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <TextField fx:id="priceField" layoutX="239.0" layoutY="63.0" onKeyTyped="#onPriceChanged" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="443.0" layoutY="34.0" opacity="0.8" text="Quantidade">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="qtdField" layoutX="443.0" layoutY="63.0" onAction="#getKeyboard" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <TextField fx:id="qtdField" layoutX="443.0" layoutY="63.0" onAction="#getKeyboard" onKeyTyped="#onQtdChanges" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
       <Button layoutX="369.0" layoutY="63.0" mnemonicParsing="false" onAction="#editValue" prefHeight="35.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="21.0">
