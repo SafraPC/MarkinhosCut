@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 public class ServiceField {
 
 	private String name;
-	double price;
+	private double price;
 
 	private boolean isEditing = false;
 
@@ -17,14 +17,6 @@ public class ServiceField {
 	private TextField nameServiceField,priceServiceField;
 	@FXML
 	private Button deleteButton,editButton;
-	@FXML
-	private AnchorPane anchorId;
-	
-	@FXML
-	private TextField qtdField;
-	
-	@FXML
-	private TextField qtdField1;
 
 	public void setName(String name) {
 		this.name = name;
@@ -39,7 +31,6 @@ public class ServiceField {
 		if(isEditing){
 			deleteButton.setText("Inativar");
 			editButton.setText("Editar");
-
 			nameServiceField.setText(name);
 			priceServiceField.setText(Double.toString(price));
 			handleInputs(true);

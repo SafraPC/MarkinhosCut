@@ -24,7 +24,4 @@ public class Services {
         return value;
     }
 
-    public boolean getActive(){
-        return active;
-    }
 }

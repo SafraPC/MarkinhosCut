@@ -68,14 +68,5 @@ public class ProfessionalField {
 		this.cpf = cpf;
 		this.cpfField.setText(cpf);
 	}
-	
-	public String getCpf() {
-		return cpf;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	
+
 }
