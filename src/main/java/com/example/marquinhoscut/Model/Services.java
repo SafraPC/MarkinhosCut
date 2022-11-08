@@ -15,18 +15,6 @@ public class Services {
         this.name = new SimpleStringProperty(name).get();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
 
     public String getName() {
         return name;

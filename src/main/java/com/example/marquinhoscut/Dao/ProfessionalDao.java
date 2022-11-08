@@ -1,7 +1,7 @@
 package com.example.marquinhoscut.Dao;
 
 import com.example.marquinhoscut.Model.Professional;
-import com.example.marquinhoscut.ServicesDB.Markinhos_cutDbConnect;
+import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,13 +15,13 @@ public class ProfessionalDao {
     public ArrayList<Professional> getListProfessional() throws SQLException {
 
         ArrayList<Professional> professionals = new ArrayList<>();
-        Connection con = null;
-        ResultSet result = null;
-        Statement statement = null;
+        Connection connection = null;
+        ResultSet result;
+        Statement statement;
 
         try {
-            con = Markinhos_cutDbConnect.getConnection();
-            statement = con.createStatement();
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
             result = statement.executeQuery("SELECT * FROM funcionario;");
 
             Professional p;
@@ -34,8 +34,9 @@ public class ProfessionalDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(ProfessionalDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } finally {
-           con.close();
+            connection.close();
         }
         return professionals;
     }

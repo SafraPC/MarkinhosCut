@@ -2,8 +2,8 @@ package com.example.marquinhoscut.ServicesDB;
 
 import java.sql.Connection;
 
-public class Markinhos_cutDbConnect {
+public class DatabaseConnection {
     public static Connection getConnection(){
-        return new ConnectDbMySQL().getConnection();
+        return new ConnectMySQL().getConnection();
     }
 }

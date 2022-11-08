@@ -1,8 +1,7 @@
 package com.example.marquinhoscut.Dao;
 
-import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Model.Services;
-import com.example.marquinhoscut.ServicesDB.Markinhos_cutDbConnect;
+import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ public class ServiceDao {
         Statement statement = null;
 
         try {
-            con = Markinhos_cutDbConnect.getConnection();
+            con = DatabaseConnection.getConnection();
             statement = con.createStatement();
             result = statement.executeQuery("SELECT * FROM servico");
 

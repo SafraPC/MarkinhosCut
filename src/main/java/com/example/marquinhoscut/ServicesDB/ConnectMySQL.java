@@ -3,14 +3,13 @@ package com.example.marquinhoscut.ServicesDB;
 
 import com.example.marquinhoscut.App;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConnectDbMySQL extends ConnectDB{
-    public ConnectDbMySQL(){
+public class ConnectMySQL extends DatabaseLinks {
+    public ConnectMySQL(){
         this.driver = "com.mysql.cj.jdbc.Driver";
         this.port = 3306;
         this.server = "localhost";
@@ -20,17 +19,17 @@ public class ConnectDbMySQL extends ConnectDB{
     }
 
     @Override
-    public Connection getConnection() {
+    public java.sql.Connection getConnection() {
 
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(getURL(), user, password);
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
-            Logger.getLogger(ConnectDbMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectMySQL.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            Logger.getLogger(ConnectDbMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return con;
     }
