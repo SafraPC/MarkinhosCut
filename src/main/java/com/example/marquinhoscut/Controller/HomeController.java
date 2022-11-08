@@ -44,6 +44,20 @@ public class HomeController extends BarberBar {
 	private ChoiceBox<String> CBPaymentMethod;
 	@FXML
 	public Label toReceive;
+
+
+	@FXML
+	void initialize() {
+		try{
+			handleNavigationBar(buttonAdm);
+			handleAddNewSection();
+			datePicker.setValue(LocalDate.now());
+			loadChoiceBox();
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
 	@FXML
 	private void handleAddNewSection() {
 		try{
@@ -69,17 +83,19 @@ public class HomeController extends BarberBar {
 				if( Integer.parseInt(fields.getQtdField().getText()) <= 0 ){
 					System.out.println("Preencha corretamente o campo, Valor deve ser maior que 0.");
 					return false;
-				}else if (fields.getServiceCB().getSelectionModel().isEmpty()) {
+				}
+				if (fields.getServiceCB().getSelectionModel().isEmpty()) {
 					System.out.println("Preencha corretamente o campo Serviço.");
 					return false;
-				} else if (CBbarber.getSelectionModel().isEmpty()) {
+				}
+				if (CBbarber.getSelectionModel().isEmpty()) {
 					System.out.println("Preencha corretamente o campo Barbeiro.");
 					return false;
-				}else if (CBPaymentMethod.getSelectionModel().isEmpty()) {
+				}
+				if (CBPaymentMethod.getSelectionModel().isEmpty()) {
 					System.out.println("Preencha corretamente o campo Método de Pagamento.");
 					return false;
 				}
-
 			}
 		}catch (Exception err){
 			System.out.println(err.getMessage());
@@ -94,8 +110,6 @@ public class HomeController extends BarberBar {
 			System.out.println("deu certo");
 		}
 	}
-
-
 
 	@FXML
 	void loadChoiceBox() {
@@ -130,16 +144,6 @@ public class HomeController extends BarberBar {
 		}catch(Exception err){
 			System.out.println(err.getMessage());
 			return "";
-		}
-	}
-	@FXML
-	void initialize() {
-		try{
-			handleNavigationBar(buttonAdm);
-			handleAddNewSection();
-			datePicker.setValue(LocalDate.now());
-			loadChoiceBox();
-		}catch (Exception e){
 		}
 	}
 }
