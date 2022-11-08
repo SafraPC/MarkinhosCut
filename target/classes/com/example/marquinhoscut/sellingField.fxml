@@ -33,7 +33,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="qtdField" layoutX="443.0" layoutY="63.0" onAction="#getKeyboard" onKeyTyped="#onQtdChanges" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+      <TextField fx:id="qtdField" layoutX="443.0" layoutY="63.0"  onKeyTyped="#onQtdChanges" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
       <Button layoutX="369.0" layoutY="63.0" mnemonicParsing="false" onAction="#editValue" prefHeight="35.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="21.0">

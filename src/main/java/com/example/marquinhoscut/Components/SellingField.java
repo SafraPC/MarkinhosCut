@@ -36,6 +36,8 @@ public class SellingField {
 	@FXML
 	private ChoiceBox<String> serviceCB;
 
+
+
 	@FXML
 	private void initialize(){
 		loadChoiceBox();
@@ -70,24 +72,9 @@ public class SellingField {
 	void onQtdChanges(KeyEvent event) {
 		this.getCallback();
 	}
-	private void getCallback(){
-		try {
-			new Thread(()->{
-				this.callback.run();
-			}).run();
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
 
 	public void setParentCallback(Thread thread){
 		this.callback = thread;
-	}
-
-	public void handleDelete() {
-		this.gridParent.getChildren().remove(anchorId);
-		this.controllers.remove(this);
-		this.getCallback();
 	}
 
 	public void editValue(ActionEvent event){
@@ -98,9 +85,13 @@ public class SellingField {
 			priceField.setEditable(true);
 		}
 	}
-	public void getKeyboard(ActionEvent event){
 
+	public void handleDelete() {
+		this.gridParent.getChildren().remove(anchorId);
+		this.controllers.remove(this);
+		this.getCallback();
 	}
+
 	public void getValue(){
 		double valueService;
 		int index = serviceCB.getSelectionModel().getSelectedIndex();
@@ -108,6 +99,17 @@ public class SellingField {
 		priceField.setText(Double.toString(valueService));
 		this.getCallback();
 	}
+
+	private void getCallback(){
+		try {
+			new Thread(()->{
+				this.callback.run();
+			}).run();
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
 
 	public double toReceive(TextField priceField,TextField qtdField){
 		double price = Double.parseDouble(priceField.getText());

@@ -41,7 +41,7 @@ public class AdminBar extends Bar{
 		}
 	}
 	
-	private void goTo(Button buttonScene,String fxml,String title ){
+	public void goTo(Button buttonScene,String fxml,String title ){
 		try{
 			Stage stage = (Stage) buttonScene.getScene().getWindow();
 			FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));

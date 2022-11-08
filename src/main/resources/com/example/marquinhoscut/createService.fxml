@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.marquinhoscut.CreateService"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="750.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.CreateServicesController">
+    <children>
+        <Pane fx:id="navigationBarProfessionals" prefHeight="50.0" prefWidth="750.0" style="-fx-background-color: D9D9D9;">
+            <children>
+                <Button fx:id="exitButton" layoutX="631.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Sair">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="professionalButton" layoutX="-4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Profissionais">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="servicesButton" layoutX="113.0" layoutY="-1.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Serviços">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="resultsButton" layoutX="228.0" minWidth="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Resultados">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+        <Label layoutX="33.0" layoutY="234.0" opacity="0.4" text="Nome">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="searchField" layoutX="33.0" layoutY="263.0" prefHeight="35.0" prefWidth="682.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+        <Button fx:id="AddProfessional" layoutX="33.0" layoutY="72.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #FF0101;" text="Cancelar" textFill="WHITE">
+            <font>
+                <Font size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Label layoutX="34.0" layoutY="332.0" opacity="0.4" text="Preço">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="searchField1" layoutX="34.0" layoutY="361.0" prefHeight="35.0" prefWidth="682.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
+        <Button fx:id="AddProfessional1" layoutX="326.0" layoutY="450.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #03AA00;" text="Confirmar" textFill="WHITE">
+            <font>
+                <Font size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
 </AnchorPane>

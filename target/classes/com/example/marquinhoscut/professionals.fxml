@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.ProfessionalsController">
+<AnchorPane prefHeight="750.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.ProfessionalsController">
     <children>
         <Pane fx:id="navigationBarProfessionals" prefHeight="50.0" prefWidth="750.0" style="-fx-background-color: D9D9D9;">
             <children>
@@ -56,7 +56,7 @@
          </font>
       </Label>
       <TextField fx:id="searchField" layoutX="504.0" layoutY="78.0" onKeyTyped="#onChange" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
-      <Button fx:id="AddProfessional" layoutX="17.0" layoutY="70.0" mnemonicParsing="false" onAction="#populateProfessionals" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: green;" text="Adicionar" textFill="WHITE">
+      <Button fx:id="AddProfessional" layoutX="17.0" layoutY="70.0" mnemonicParsing="false" onAction="#renderCreateProfessionals" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: green;" text="Adicionar" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>
