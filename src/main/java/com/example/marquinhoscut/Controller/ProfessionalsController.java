@@ -17,19 +17,17 @@ import javafx.scene.layout.GridPane;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ProfessionalsController extends AdminBar {
-	
 	private ArrayList<ProfessionalField> controllers = new ArrayList();
 	private ArrayList<Professional> professionals = new ArrayList<>();
-	
 	private boolean preventSearch = false;
 	
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
 	@FXML
 	private GridPane gridPane;
-	
 	@FXML
 	private TextField searchField;
 
@@ -72,8 +70,6 @@ public class ProfessionalsController extends AdminBar {
 		}
 	}
 	
-
-
 	@FXML
 	void onChange() {
 		if(preventSearch){
@@ -88,8 +84,8 @@ public class ProfessionalsController extends AdminBar {
 					!item.getCpf().contains(searchField.getText()));
 		}
 		if(filteredList.size() > 0){
-			filteredList.sort((a,b)->a.getName().compareTo(b.getName()));
 			filteredList.sort((a,b)->Boolean.compare(!a.isActive(),!b.isActive()));
+			filteredList.sort(Comparator.comparing(Professional::getName));
 			for (Professional professional : filteredList){
 				handleCreatePane(professional.getName(),professional.getCpf(),professional.isActive());
 			}

@@ -12,6 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServiceDao {
+
+    public boolean handleToogleFuncionaryStatus(boolean statusToChange){
+        return true;
+    }
+
     public ArrayList<Services> getListServices() throws SQLException {
 
         ArrayList<Services> services = new ArrayList<>();

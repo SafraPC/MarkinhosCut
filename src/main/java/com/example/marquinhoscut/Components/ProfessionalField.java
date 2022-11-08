@@ -65,7 +65,6 @@ public class ProfessionalField {
 
 	public void setActivated(boolean activated) {
 		isActivated = activated;
-		System.out.println(activated);
 		inactiveButtonName = activated ? "Inativar" : "Ativar";
 		this.deleteButton.setText(inactiveButtonName);
 	}
