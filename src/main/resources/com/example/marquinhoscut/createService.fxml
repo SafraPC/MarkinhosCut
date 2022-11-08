@@ -40,7 +40,7 @@
             </font>
         </Label>
         <TextField fx:id="searchField" layoutX="33.0" layoutY="263.0" prefHeight="35.0" prefWidth="682.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
-        <Button fx:id="AddProfessional" layoutX="33.0" layoutY="72.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #FF0101;" text="Cancelar" textFill="WHITE">
+        <Button fx:id="back" layoutX="17.0" layoutY="70.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #FF0101;" text="Cancelar" textFill="WHITE">
             <font>
                 <Font size="12.0" />
             </font>

@@ -56,7 +56,7 @@
          </font>
       </Label>
       <TextField fx:id="searchField" layoutX="504.0" layoutY="78.0" onKeyTyped="#onChange" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px;" />
-      <Button layoutX="17.0" layoutY="70.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: green;" text="Adicionar" textFill="WHITE">
+      <Button layoutX="17.0" layoutY="70.0" onAction="#renderCreateServices" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: green;" text="Adicionar" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>

@@ -6,10 +6,13 @@ import javafx.scene.control.Button;
 
 public class CreateProfessionalsController extends AdminBar {
     @FXML
-    private Button exitButton,servicesButton,professionalButton,resultsButton;
+    private Button exitButton,servicesButton,professionalButton,resultsButton,back;
 
     @FXML
     void initialize(){
         handleNavigationBar(exitButton,servicesButton,professionalButton,resultsButton);
+        back.setOnAction(event->{
+            goTo(back,"professionals.fxml","Profissionais");
+        });
     }
 }

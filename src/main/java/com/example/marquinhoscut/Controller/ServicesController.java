@@ -8,6 +8,7 @@ import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Model.Services;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -24,7 +25,6 @@ public class ServicesController extends AdminBar {
 	}
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
-	private boolean preventSearch = false;
 	@FXML
 	private TextField searchField;
 	@FXML
@@ -32,6 +32,28 @@ public class ServicesController extends AdminBar {
 
 	private ArrayList<ServiceField> controllers = new ArrayList();
 	private ArrayList<Services> services = new ArrayList<>();
+
+
+	@FXML
+	void initialize(){
+		handleNavigationBar(exitButton,servicesButton,professionalButton,resultsButton);
+		populateSevices();
+		onChange();
+	}
+
+	@FXML
+	public void renderCreateServices(ActionEvent actionEvent) {
+		goTo(servicesButton,"createService.fxml","Criar novo serviço");
+	}
+
+	private void populateSevices(){
+		try{
+			ServiceDao sDao = new ServiceDao();
+			services.addAll(sDao.getListServices());
+		}catch(Exception err){
+			System.out.println(err.getMessage());
+		}
+	}
 
 	private void handleCreatePane(String name, double priceService){
 		try{
@@ -49,26 +71,10 @@ public class ServicesController extends AdminBar {
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
 		}
 	}
-	private void populateSevices(){
-		try{
-			ServiceDao sDao = new ServiceDao();
-			services.addAll(sDao.getListServices());
-		}catch(Exception err){
-			System.out.println(err.getMessage());
-		}
 
-	}
-	@FXML
-	void initialize(){
-		handleNavigationBar(exitButton,servicesButton,professionalButton,resultsButton);
-		populateSevices();
-		onChange();
-	}
 	@FXML
 	void onChange() {
-		if(preventSearch){
-			return;
-		}
+
 		gridPane.getChildren().clear();
 		ArrayList<Services> filteredList = new ArrayList();
 		filteredList.addAll(services);
@@ -83,4 +89,5 @@ public class ServicesController extends AdminBar {
 			}
 		}
 	}
+
 }
