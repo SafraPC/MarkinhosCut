@@ -20,12 +20,6 @@ import java.util.concurrent.Callable;
 
 
 public class HomeController extends BarberBar {
-	
-	private String[] barbers = {
-			"Leandro",
-			"Rhuan",
-			"Marcelo"
-	};
 	private String[] payments = {
 			"Cartão de Crédito",
 			"Dinheiro",
@@ -38,9 +32,6 @@ public class HomeController extends BarberBar {
 	private ArrayList<String> listPaymentMethod =  new ArrayList();
 	private ArrayList<SellingField> controllers = new ArrayList();
 
-	private ArrayList <String> professionalName = new ArrayList();
-	
-	
 	@FXML
 	private Button buttonAdm;
 	@FXML
@@ -100,7 +91,6 @@ public class HomeController extends BarberBar {
 	@FXML
 	void handleSubmit() {
 		if(isFormValid()){
-			toReceive.setText(sumToReceive());
 			System.out.println("deu certo");
 		}
 	}

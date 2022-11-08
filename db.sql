@@ -1,6 +1,7 @@
-DROP DATABASE Markinhos_cut;
+DROP DATABASE IF EXISTS Markinhos_cut;
 CREATE DATABASE Markinhos_cut;
 USE Markinhos_cut;
+
 CREATE TABLE funcionario(
 cpf VARCHAR(11) NOT NULL,
 nome VARCHAR(100),
@@ -17,6 +18,7 @@ dataServico DATE,
 PRIMARY KEY (registroID),
 FOREIGN KEY (cpf) REFERENCES funcionario (cpf)
 );
+
 CREATE TABLE servico(
 servicoId INTEGER AUTO_INCREMENT,
 preco DOUBLE,
