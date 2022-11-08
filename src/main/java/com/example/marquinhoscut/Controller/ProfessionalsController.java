@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class ProfessionalsController extends AdminBar {
@@ -54,7 +55,7 @@ public class ProfessionalsController extends AdminBar {
 		}
 
 	}
-	private void handleCreatePane(String name, String cpf){
+	private void handleCreatePane(String name, String cpf, boolean isActivated){
 		try{
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("professionalField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
@@ -62,6 +63,7 @@ public class ProfessionalsController extends AdminBar {
 			ProfessionalField controller = fxmlLoader.getController();
 			controller.setName(name);
 			controller.setCpf(cpf);
+			controller.setActivated(isActivated);
 			controllers.add(controller);
 			gridPane.add(ap, 0, gridPane.getRowCount());
 			
@@ -87,8 +89,9 @@ public class ProfessionalsController extends AdminBar {
 		}
 		if(filteredList.size() > 0){
 			filteredList.sort((a,b)->a.getName().compareTo(b.getName()));
+			filteredList.sort((a,b)->Boolean.compare(!a.isActive(),!b.isActive()));
 			for (Professional professional : filteredList){
-				handleCreatePane(professional.getName(),professional.getCpf());
+				handleCreatePane(professional.getName(),professional.getCpf(),professional.isActive());
 			}
 		}
 	}

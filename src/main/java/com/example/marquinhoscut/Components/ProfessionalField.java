@@ -13,39 +13,48 @@ import java.util.ArrayList;
 
 public class ProfessionalField {
 	
-	private String name,cpf;
+	private String name,cpf,inactiveButtonName;
+
+	private boolean isActivated = false;
 	private boolean isEditing = false;
-	
 	
 	@FXML
 	private TextField nameField,cpfField;
 	@FXML
 	private Button deleteButton,editButton;
-	
-	
 
+
+	private void handleInputs(boolean active){
+		cpfField.setDisable(active);
+		nameField.setDisable(active);
+	}
+
+	private void correctButtonStatus(){
+		if(isEditing){
+			deleteButton.setText(inactiveButtonName);
+			editButton.setText("Editar");
+			handleInputs(true);
+		}
+	}
 	@FXML
 	void handleDelete() {
+		correctButtonStatus();
 		if(isEditing){
-			deleteButton.setText("Inativar");
-			editButton.setText("Editar");
-			
 			nameField.setText(name);
 			cpfField.setText(cpf);
-			handleInputs(true);
 			isEditing = false;
+			return;
 		}
+
 	}
 	
 	@FXML
 	void handleEdit() {
+		correctButtonStatus();
 		if(isEditing){
-			deleteButton.setText("Inativar");
-			editButton.setText("Editar");
-			handleInputs(true);
-			isEditing = false;
 			setCpf(cpfField.getText());
 			setName(nameField.getText());
+			isEditing = false;
 			return;
 		}
 		isEditing = true;
@@ -53,12 +62,14 @@ public class ProfessionalField {
 		editButton.setText("Salvar");
 		deleteButton.setText("Cancelar");
 	}
-	
-	private void handleInputs(boolean active){
-		cpfField.setDisable(active);
-		nameField.setDisable(active);
+
+	public void setActivated(boolean activated) {
+		isActivated = activated;
+		System.out.println(activated);
+		inactiveButtonName = activated ? "Inativar" : "Ativar";
+		this.deleteButton.setText(inactiveButtonName);
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 		this.nameField.setText(name);

@@ -20,5 +20,5 @@ public class Professional {
 		return cpf;
 	}
 	
-
+	public boolean isActive(){return this.active;}
 }
