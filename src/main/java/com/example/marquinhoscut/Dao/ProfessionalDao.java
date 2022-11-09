@@ -51,7 +51,7 @@ public class ProfessionalDao {
         try{
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
-            result = statement.executeQuery("CALL createProfessional("+name+", "+cpf+")");
+            result = statement.executeQuery("CALL createProfessional('"+name+"', "+cpf+")");
             return true;
         }catch(SQLException ex){
             return false;

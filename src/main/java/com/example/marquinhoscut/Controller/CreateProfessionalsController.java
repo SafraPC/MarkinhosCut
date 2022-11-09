@@ -1,12 +1,17 @@
 package com.example.marquinhoscut.Controller;
 
+import com.example.marquinhoscut.Dao.ProfessionalDao;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
+
 public class CreateProfessionalsController extends AdminBar {
+
+    private ProfessionalDao professionalDao = new ProfessionalDao();
     @FXML
     private Button exitButton,servicesButton,professionalButton,resultsButton,back;
 
@@ -22,7 +27,12 @@ public class CreateProfessionalsController extends AdminBar {
 
     @FXML
     public void handleCreateProfessional(ActionEvent actionEvent) {
-        System.out.println(nameField.getText());
-        System.out.println(cpfField.getText());
+        try {
+            if(professionalDao.handleCreateProfessional(nameField.getText(),cpfField.getText())){
+                goTo(back,"professionals.fxml","Profissionais");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
