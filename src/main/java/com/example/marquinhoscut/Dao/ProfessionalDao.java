@@ -12,24 +12,68 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ProfessionalDao {
+
+    Connection connection;
+    ResultSet result;
+    Statement statement ;
+
+
+    public boolean handleChangeProfessionalStatus(boolean changeTo, int professionalId) throws SQLException {
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery("CALL changeProfessionalStatus("+changeTo+", "+professionalId+")");
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
+
+    public boolean handleEditProfessional(String name, String cpf, int professionalId) throws SQLException{
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            String query = "CALL editProfessional('"+name+"', "+cpf+","+professionalId+")";
+            System.out.println(query);
+            result = statement.executeQuery(query);
+            System.out.println(result.toString());
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
+
+    public boolean handleCreateProfessional(String name, String cpf) throws SQLException{
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery("CALL createProfessional("+name+", "+cpf+")");
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
+
+
     public ArrayList<Professional> getListProfessional() throws SQLException {
-
         ArrayList<Professional> professionals = new ArrayList<>();
-        Connection connection = null;
-        ResultSet result;
-        Statement statement;
-
         try {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             result = statement.executeQuery("SELECT * FROM Professional;");
-
-            Professional p;
+            Professional professional;
             while (result.next()) {
-                p = new Professional(result.getString("professionalName"),
+                professional = new Professional(result.getString("professionalName"),
                         result.getString("cpf"),
-                        result.getBoolean("isActive"));
-                professionals.add(p);
+                        result.getBoolean("isActive"),
+                        result.getInt("professionalId"));
+                professionals.add(professional);
             }
 
         } catch (SQLException ex) {

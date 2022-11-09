@@ -80,7 +80,9 @@ CREATE PROCEDURE editProfessional (nomeParam VARCHAR(100), cpfParam VARCHAR(15),
          UPDATE Professional SET professionalName = nomeParam, cpf = cpfParam WHERE professionalId = professionalIdParam;
 		END |
         
-CALL editProfessional("Safrudo","42413049873", 8);
+CALL editProfessional("Henrique123","55698877455123123123", 2);
+CALL editProfessional('Henriquee', 5569887745566,2);
+SELECT * FROM Professional;
         
 DELIMITER | 
 CREATE PROCEDURE changeProfessionalStatus (changeTo BOOLEAN,professionalIdParam INTEGER)

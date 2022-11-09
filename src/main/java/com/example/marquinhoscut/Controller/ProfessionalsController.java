@@ -53,7 +53,7 @@ public class ProfessionalsController extends AdminBar {
 		}
 
 	}
-	private void handleCreatePane(String name, String cpf, boolean isActivated){
+	private void handleCreatePane(String name, String cpf, int id,boolean isActivated){
 		try{
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("professionalField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
@@ -61,6 +61,7 @@ public class ProfessionalsController extends AdminBar {
 			ProfessionalField controller = fxmlLoader.getController();
 			controller.setName(name);
 			controller.setCpf(cpf);
+			controller.setId(id);
 			controller.setActivated(isActivated);
 			controllers.add(controller);
 			gridPane.add(ap, 0, gridPane.getRowCount());
@@ -87,7 +88,7 @@ public class ProfessionalsController extends AdminBar {
 			filteredList.sort((a,b)->Boolean.compare(!a.isActive(),!b.isActive()));
 			filteredList.sort(Comparator.comparing(Professional::getName));
 			for (Professional professional : filteredList){
-				handleCreatePane(professional.getName(),professional.getCpf(),professional.isActive());
+				handleCreatePane(professional.getName(),professional.getCpf(),professional.getId(),professional.isActive());
 			}
 		}
 	}

@@ -1,4 +1,6 @@
 package com.example.marquinhoscut.Components;
+import com.example.marquinhoscut.Dao.ProfessionalDao;
+import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,14 +11,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProfessionalField {
+public class ProfessionalField extends AdminBar {
 	
 	private String name,cpf,inactiveButtonName;
+	private int id;
 
 	private boolean isActivated = false;
 	private boolean isEditing = false;
+	private ProfessionalDao professionalDao = new ProfessionalDao();
 	
 	@FXML
 	private TextField nameField,cpfField;
@@ -29,6 +34,8 @@ public class ProfessionalField {
 		nameField.setDisable(active);
 	}
 
+
+
 	private void correctButtonStatus(){
 		if(isEditing){
 			deleteButton.setText(inactiveButtonName);
@@ -36,6 +43,7 @@ public class ProfessionalField {
 			handleInputs(true);
 		}
 	}
+
 	@FXML
 	void handleDelete() {
 		correctButtonStatus();
@@ -45,6 +53,14 @@ public class ProfessionalField {
 			isEditing = false;
 			return;
 		}
+		try {
+			if(professionalDao.handleChangeProfessionalStatus(!isActivated,id)){
+				setActivated(!isActivated);
+				inactiveButtonName = isActivated ? "Inativar" : "Ativar";
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 	
@@ -52,9 +68,19 @@ public class ProfessionalField {
 	void handleEdit() {
 		correctButtonStatus();
 		if(isEditing){
-			setCpf(cpfField.getText());
-			setName(nameField.getText());
-			isEditing = false;
+			try {
+				if(professionalDao.handleEditProfessional(nameField.getText(),cpfField.getText(),id)){
+					setCpf(cpfField.getText());
+					setName(nameField.getText());
+					return;
+				}
+				setCpf(cpf);
+				setName(name);
+			} catch (Exception e) {
+				//failQ
+			}finally {
+				isEditing = false;
+			}
 			return;
 		}
 		isEditing = true;
@@ -62,6 +88,8 @@ public class ProfessionalField {
 		editButton.setText("Salvar");
 		deleteButton.setText("Cancelar");
 	}
+
+
 
 	public void setActivated(boolean activated) {
 		isActivated = activated;
@@ -79,4 +107,7 @@ public class ProfessionalField {
 		this.cpfField.setText(cpf);
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 }

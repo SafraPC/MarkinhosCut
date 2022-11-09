@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
-public abstract class Bar {
+public abstract class Bar extends Navigation{
 	
 	protected enum adminOptions{
 	EXIT("Sair"),EMPLOYEES("Profissionais"),SERVICES("Serviços"),RESULTS("Resultados");

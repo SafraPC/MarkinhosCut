@@ -41,18 +41,5 @@ public class AdminBar extends Bar{
 		}
 	}
 	
-	public void goTo(Button buttonScene,String fxml,String title ){
-		try{
-			Stage stage = (Stage) buttonScene.getScene().getWindow();
-			FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
-			AnchorPane anchorPane = loader.load();
-			Scene scene = new Scene(anchorPane);
-			stage.setScene(scene);
-			stage.setTitle(title);
-			stage.show();
-		}catch(Exception err){
-			DialogMessage.show("Houve um erro!!!",err.getMessage(), Alert.AlertType.ERROR);
-		}
-		
-	}
+
 }
