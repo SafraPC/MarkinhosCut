@@ -22,13 +22,13 @@ public class ProfessionalDao {
         try {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
-            result = statement.executeQuery("SELECT * FROM funcionario;");
+            result = statement.executeQuery("SELECT * FROM Professional;");
 
             Professional p;
             while (result.next()) {
-                p = new Professional(result.getString("nome"),
+                p = new Professional(result.getString("professionalName"),
                         result.getString("cpf"),
-                        result.getBoolean("ativo"));
+                        result.getBoolean("isActive"));
                 professionals.add(p);
             }
 

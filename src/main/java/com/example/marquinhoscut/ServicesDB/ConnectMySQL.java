@@ -13,7 +13,7 @@ public class ConnectMySQL extends DatabaseLinks {
         this.driver = "com.mysql.cj.jdbc.Driver";
         this.port = 3306;
         this.server = "localhost";
-        this.db = "Markinhos_cut";
+        this.db = "MarkinhosCut";
         this.user = "root";
         this.password = App.getDbPassword();
     }

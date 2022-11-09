@@ -27,13 +27,13 @@ public class ServiceDao {
         try {
             con = DatabaseConnection.getConnection();
             statement = con.createStatement();
-            result = statement.executeQuery("SELECT * FROM servico");
+            result = statement.executeQuery("SELECT * FROM Service");
 
             Services service;
             while (result.next()) {
-                service = new Services(result.getString("nome"),
-                        result.getDouble("preco"),
-                        result.getBoolean("ativo"));
+                service = new Services(result.getString("serviceName"),
+                        result.getDouble("price"),
+                        result.getBoolean("isActive"));
                 services.add(service);
             }
 

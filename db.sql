@@ -1,67 +1,96 @@
-DROP DATABASE IF EXISTS Markinhos_cut;
-CREATE DATABASE Markinhos_cut;
-USE Markinhos_cut;
+DROP DATABASE IF EXISTS MarkinhosCut;
+CREATE DATABASE MarkinhosCut;
+USE MarkinhosCut;
 
-CREATE TABLE funcionario(
+CREATE TABLE Professional(
+professionalId INTEGER AUTO_INCREMENT PRIMARY KEY,
+cpf VARCHAR(11) NOT NULL UNIQUE,
+professionalName VARCHAR(100),
+isActive BOOLEAN
+);
+
+CREATE TABLE PaymentMethod(
+paymentName VARCHAR(50) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE Selling(
+sellingId INTEGER AUTO_INCREMENT PRIMARY KEY,
 cpf VARCHAR(11) NOT NULL,
-nome VARCHAR(100),
-ativo BOOLEAN,
-PRIMARY KEY (cpf)
+paymentName VARCHAR(50) NOT NULL,
+total DOUBLE NOT NULL,
+sellingDate DATE NOT NULL,
+FOREIGN KEY (cpf) REFERENCES Professional (cpf),
+FOREIGN KEY (paymentName) REFERENCES PaymentMethod (paymentName)
 );
 
-CREATE TABLE registroServico(
-registroID INTEGER AUTO_INCREMENT,
-cpf VARCHAR(11) NOT NULL,
-metodoPagamento enum("Pix", "Crédito","Dinheiro","Débito"),
-valorTotal DOUBLE,
-dataServico DATE,
-PRIMARY KEY (registroID),
-FOREIGN KEY (cpf) REFERENCES funcionario (cpf)
+CREATE TABLE Service(
+serviceId INTEGER AUTO_INCREMENT PRIMARY KEY,
+price DOUBLE NOT NULL,
+serviceName VARCHAR (100) NOT NULL,
+isActive BOOLEAN NOT NULL
 );
 
-CREATE TABLE servico(
-servicoId INTEGER AUTO_INCREMENT,
-preco DOUBLE,
-nome VARCHAR (100),
-ativo BOOLEAN,
-PRIMARY KEY (servicoId)
+CREATE TABLE qtdSelling(
+serviceId INTEGER NOT NULL,
+sellingId INTEGER NOT NULL,
+quantity INTEGER NOT NULL,
+FOREIGN KEY (serviceId) REFERENCES Service (serviceId),
+FOREIGN KEY (sellingId) REFERENCES Selling (sellingId)
+ON DELETE CASCADE
 );
 
-CREATE TABLE quantServico(
-servicoId INTEGER,
-registroID INTEGER,
-quantidade INTEGER,
-FOREIGN KEY (servicoId) REFERENCES servico (servicoId),
-FOREIGN KEY (registroID) REFERENCES registroServico (registroID)
-on delete cascade
-);
+INSERT INTO Professional (cpf, professionalName, isActive) VALUES 
+("48663164890", "Marcos", TRUE),
+("55698877455", "Henrique", TRUE),
+("77588933641", "Marcelo", TRUE),
+("11233255488", "Leandro", TRUE),
+("11158899966", "ana", FALSE),
+("22046678988", "joao", FALSE),
+("11447755588", "agata", FALSE);
 
-insert into funcionario (cpf, nome, ativo) values 
-("48663164890", "Marcos", true),
-("55698877455", "Henrique", true),
-("77588933641", "Marcelo", true),
-("11233255488", "Leandro", false),
-("11158899966", "ana", false),
-("22046678988", "joao", false),
-("11447755588", "agata", false);
+INSERT INTO Service (price, serviceName, isActive) VALUES 
+(25.0, "Corte Degrade", TRUE),
+(10.0, "Sobrancelha", TRUE),
+(20.0, "Barba", TRUE),
+(35.0, "Mechas", FALSE),
+(50.0, "Progressiva", TRUE);
 
-insert into servico (preco, nome, ativo) values 
-(25.0, "Corte Degrade", true),
-(10.0, "Sobrancelha", true),
-(20.0, "Barba", true),
-(35.0, "Mechas", false);
+INSERT INTO PaymentMethod (paymentName) values 
+("Pix");
 
-insert into servico (preco, nome, ativo) values
-(50.0, "Progressiva", true);
-
-insert into registroServico (cpf, metodoPagamento, valorTotal, dataServico) values 
+INSERT INTO Selling (cpf, paymentName, total, sellingDate) values 
 ("48663164890", "Pix", 0, '2020-03-01');
 
-insert into quantServico ( registroID, servicoId,quantidade) values 
+insert into qtdSelling ( sellingId, serviceId,quantity) values 
 (1, 1, 2),
 (1, 2, 3);
 
-SELECT registroServico.cpf, registroServico.metodoPagamento, quantServico.quantidade, registroServico.valorTotal 
-FROM registroServico INNER JOIN quantServico USING(registroID);
+DELIMITER | 
+CREATE PROCEDURE createProfessional (nameParam VARCHAR(100), cpfParam VARCHAR(15))
+       BEGIN
+		   INSERT INTO Professional (cpf, professionalName, isActive) VALUES 
+		  (cpfParam, nameParam, TRUE);
+		END |
 
-SELECT * FROM Markinhos_cut.servico;
+CALL createProfessional("Safrudo","42413049872");
+
+DELIMITER | 
+CREATE PROCEDURE editProfessional (nomeParam VARCHAR(100), cpfParam VARCHAR(15), professionalIdParam INTEGER)
+       BEGIN
+         UPDATE Professional SET professionalName = nomeParam, cpf = cpfParam WHERE professionalId = professionalIdParam;
+		END |
+        
+CALL editProfessional("Safrudo","42413049873", 8);
+        
+DELIMITER | 
+CREATE PROCEDURE changeProfessionalStatus (changeTo BOOLEAN,professionalIdParam INTEGER)
+       BEGIN
+         UPDATE Professional SET isActive = changeTo WHERE professionalId = professionalIdParam;
+		END |
+
+CALL changeProfessionalStatus(FALSE, 8);
+
+
+        
+
+
