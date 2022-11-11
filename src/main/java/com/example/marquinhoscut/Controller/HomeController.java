@@ -1,7 +1,9 @@
 package com.example.marquinhoscut.Controller;
 import com.example.marquinhoscut.App;
 import com.example.marquinhoscut.Components.SellingField;
+import com.example.marquinhoscut.Dao.PaymentMethodDao;
 import com.example.marquinhoscut.Dao.ProfessionalDao;
+import com.example.marquinhoscut.Model.PaymentMethod;
 import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Utils.Bar.BarberBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
@@ -20,16 +22,10 @@ import java.util.concurrent.Callable;
 
 
 public class HomeController extends BarberBar {
-	private String[] payments = {
-			"Cartão de Crédito",
-			"Dinheiro",
-			"Pix",
-			"Débito"
-	};
+
 	private ArrayList<Professional> professionals =  new ArrayList();
 
-	private ObservableList<String> observablelistPaymentMethod;
-	private ArrayList<String> listPaymentMethod =  new ArrayList();
+	private ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
 	private ArrayList<SellingField> controllers = new ArrayList();
 
 	@FXML
@@ -117,6 +113,10 @@ public class HomeController extends BarberBar {
 		try{
 			ProfessionalDao pDao = new ProfessionalDao();
 			professionals.addAll(pDao.getListProfessional());
+
+			PaymentMethodDao payDao = new PaymentMethodDao();
+			paymentMethods.addAll(payDao.getListPaymentMethod());
+
 		}catch(Exception err){
 			System.out.println(err.getMessage());
 		}
@@ -124,12 +124,10 @@ public class HomeController extends BarberBar {
 			CBbarber.getItems().add(professional.getName());
 		}
 
-		for(String payment : payments ){
-			listPaymentMethod.add(payment);
+		for(PaymentMethod paymentMethod : paymentMethods ){
+			CBPaymentMethod.getItems().add(paymentMethod.getName());
 		}
-	
-		observablelistPaymentMethod = FXCollections.observableArrayList(listPaymentMethod);
-		CBPaymentMethod.setItems(observablelistPaymentMethod);
+
 	}
 
 	@FXML

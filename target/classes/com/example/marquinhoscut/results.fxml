@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.ResultsController">
+<AnchorPane prefHeight="750.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Controller.ResultsController">
     <children>
         <Pane fx:id="navigationBarResults" prefHeight="50.0" prefWidth="750.0" style="-fx-background-color: D9D9D9;">
             <children>
@@ -44,10 +47,25 @@
                 <GridPane fx:id="gridPane" prefHeight="531.0" prefWidth="746.0" style="-fx-background-color: whhite;">
                     <columnConstraints>
                         <ColumnConstraints />
+                  <ColumnConstraints />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints />
+                  <RowConstraints />
                     </rowConstraints>
+               <children>
+                  <LineChart fx:id="ResultChart" prefHeight="532.0" prefWidth="788.0" title="Vendas" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <xAxis>
+                      <CategoryAxis fx:id="Date" label="Data" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="Value" label="Valores(R$)" side="LEFT" upperBound="500.0">
+                           <tickLabelFont>
+                              <Font size="12.0" />
+                           </tickLabelFont></NumberAxis>
+                    </yAxis>
+                  </LineChart>
+               </children>
                 </GridPane>
             </content>
         </ScrollPane>
@@ -86,7 +104,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="toReceive" layoutX="86.0" layoutY="163.0" opacity="0.8" prefHeight="20.0" prefWidth="98.0" text="R$18.000" textFill="#25fc04">
+      <Label fx:id="toReceive" layoutX="80.0" layoutY="160.0" opacity="0.8" prefHeight="20.0" prefWidth="98.0" text="R$18.000" textFill="#25fc04">
          <font>
             <Font size="18.0" />
          </font>
