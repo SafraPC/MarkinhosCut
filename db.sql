@@ -145,5 +145,7 @@ CREATE PROCEDURE createQtdSellingService (sellingIdParam INTEGER, serviceIdParam
 
 CALL createQtdSellingService(1,4,2,10.0);
 
+SELECT * FROM qtdService;
+
 
 

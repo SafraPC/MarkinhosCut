@@ -3,6 +3,7 @@ package com.example.marquinhoscut.Dao;
 import com.example.marquinhoscut.Model.PaymentMethod;
 import com.example.marquinhoscut.Model.Selling;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
+import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,6 +17,38 @@ public class SellingDao {
     Connection connection;
     ResultSet result;
     Statement statement ;
+
+    public boolean handleSelling (String cpf, String payment, double total, String date) throws SQLException {
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery("CALL createSelling("+cpf+", "+payment+", "+total+", "+date+")");
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
+
+    public boolean handleSellingService (int id, int serviceId, int qtd, double price) throws SQLException {
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery("CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")");
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
 
     public ArrayList<Selling> getListSelling() throws SQLException {
         ArrayList<Selling> listSelling = new ArrayList<>();
