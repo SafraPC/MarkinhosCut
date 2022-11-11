@@ -139,7 +139,10 @@ public class HomeController extends BarberBar {
 			System.out.println(err.getMessage());
 		}
 		for(Professional professional : professionals ){
-			CBbarber.getItems().add(professional.getName());
+			if(professional.isActive()){
+				CBbarber.getItems().add(professional.getName());
+			}
+
 		}
 
 		for(PaymentMethod paymentMethod : paymentMethods ){
