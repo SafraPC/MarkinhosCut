@@ -22,12 +22,14 @@ public class SellingDao {
         try{
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
-            result = statement.executeQuery("CALL createSelling("+cpf+", "+payment+", "+total+", "+date+")");
+            result = statement.executeQuery("CALL createSelling('"+cpf+"', '"+payment+"', "+total+", '"+date+"')");
+            System.out.println(result.toString());
             if(MySQLValidation.NO_UPDATED_ROWS(result)){
                 return false;
             }
             return true;
         }catch(SQLException ex){
+            System.out.println("Erro: "+ex.getMessage());
             return false;
         }finally {
             connection.close();

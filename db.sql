@@ -5,7 +5,7 @@ USE MarkinhosCut;
 CREATE TABLE Professional(
 professionalId INTEGER AUTO_INCREMENT PRIMARY KEY,
 cpf VARCHAR(11) NOT NULL UNIQUE,
-professionalName VARCHAR(100),
+professionalName VARCHAR(100) NOT NULL UNIQUE,
 isActive BOOLEAN
 );
 
@@ -145,7 +145,6 @@ CREATE PROCEDURE createQtdSellingService (sellingIdParam INTEGER, serviceIdParam
 
 CALL createQtdSellingService(1,4,2,10.0);
 
-SELECT * FROM qtdService;
 
 
 
