@@ -1,12 +1,16 @@
 package com.example.marquinhoscut.Controller;
 
+import com.example.marquinhoscut.Dao.ServiceDao;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
+
 public class CreateServicesController  extends AdminBar {
+    private ServiceDao serviceDao = new ServiceDao();
     @FXML
     private Button exitButton,servicesButton,professionalButton,resultsButton,back;
 
@@ -23,7 +27,12 @@ public class CreateServicesController  extends AdminBar {
 
     @FXML
     public void handleCreateNewService(ActionEvent actionEvent) {
-        System.out.println(nameField.getText());
-        System.out.println(priceField.getText());
+        try {
+            if(serviceDao.handleCreateService(nameField.getText(),Double.parseDouble(priceField.getText()))){
+                goTo(back,"services.fxml","Serviços");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

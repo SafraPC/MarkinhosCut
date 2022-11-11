@@ -61,7 +61,6 @@ public class ProfessionalField extends AdminBar {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 	
 	@FXML
@@ -77,7 +76,8 @@ public class ProfessionalField extends AdminBar {
 				setCpf(cpf);
 				setName(name);
 			} catch (Exception e) {
-				//failQ
+				setCpf(cpf);
+				setName(name);
 			}finally {
 				isEditing = false;
 			}

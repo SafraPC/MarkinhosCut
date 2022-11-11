@@ -2,6 +2,7 @@ package com.example.marquinhoscut.Dao;
 
 import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
+import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,6 +24,9 @@ public class ProfessionalDao {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             result = statement.executeQuery("CALL changeProfessionalStatus("+changeTo+", "+professionalId+")");
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
             return true;
         }catch(SQLException ex){
             return false;
@@ -36,9 +40,10 @@ public class ProfessionalDao {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             String query = "CALL editProfessional('"+name+"', "+cpf+","+professionalId+")";
-            System.out.println(query);
             result = statement.executeQuery(query);
-            System.out.println(result.toString());
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
             return true;
         }catch(SQLException ex){
             return false;
@@ -52,6 +57,9 @@ public class ProfessionalDao {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             result = statement.executeQuery("CALL createProfessional('"+name+"', "+cpf+")");
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
             return true;
         }catch(SQLException ex){
             return false;

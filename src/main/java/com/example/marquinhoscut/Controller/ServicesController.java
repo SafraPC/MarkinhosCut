@@ -56,7 +56,7 @@ public class ServicesController extends AdminBar {
 		}
 	}
 
-	private void handleCreatePane(String name, double priceService){
+	private void handleCreatePane(String name, double priceService, boolean isActive, int id){
 		try{
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("serviceField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
@@ -64,6 +64,8 @@ public class ServicesController extends AdminBar {
 			ServiceField controller = fxmlLoader.getController();
 			controller.setName(name);
 			controller.setPrice(priceService);
+			controller.setActive(isActive);
+			controller.setId(id);
 			controllers.add(controller);
 			gridPane.add(ap, 0, gridPane.getRowCount());
 
@@ -85,7 +87,7 @@ public class ServicesController extends AdminBar {
 		if(filteredList.size() > 0){
 			filteredList.sort(Comparator.comparing(Services::getName));
 			for (Services services : filteredList){
-				handleCreatePane(services.getName(),services.getValue());
+				handleCreatePane(services.getName(),services.getValue(),services.getIsActive(),services.getId());
 			}
 		}
 	}

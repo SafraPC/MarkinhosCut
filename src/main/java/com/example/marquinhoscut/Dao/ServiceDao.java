@@ -2,6 +2,7 @@ package com.example.marquinhoscut.Dao;
 
 import com.example.marquinhoscut.Model.Services;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
+import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,8 +23,12 @@ public class ServiceDao {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             result = statement.executeQuery("CALL changeServiceStatus("+changeTo+", "+serviceId+")");
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
             return true;
         }catch(SQLException ex){
+            System.out.println(ex.getMessage());
             return false;
         }finally {
             connection.close();
@@ -35,9 +40,10 @@ public class ServiceDao {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             String query = "CALL editService('"+name+"', "+price+","+serviceId+")";
-            System.out.println(query);
             result = statement.executeQuery(query);
-            System.out.println(result.toString());
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
             return true;
         }catch(SQLException ex){
             return false;
@@ -51,6 +57,9 @@ public class ServiceDao {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             result = statement.executeQuery("CALL createService('"+name+"', "+price+")");
+            if(MySQLValidation.NO_UPDATED_ROWS(result)){
+                return false;
+            }
             return true;
         }catch(SQLException ex){
             return false;
@@ -73,12 +82,15 @@ public class ServiceDao {
             while (result.next()) {
                 service = new Services(result.getString("serviceName"),
                         result.getDouble("price"),
-                        result.getBoolean("isActive"));
+                        result.getBoolean("isActive"),
+                        result.getInt("serviceId")
+                        );
                 services.add(service);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } finally {
             connection.close();
         }
