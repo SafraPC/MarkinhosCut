@@ -13,20 +13,60 @@ import java.util.logging.Logger;
 
 public class ServiceDao {
 
-    public boolean handleToogleFuncionaryStatus(boolean statusToChange){
-        return true;
+    Connection connection = null;
+    ResultSet result = null;
+    Statement statement = null;
+
+    public boolean handleChangeServiceStatus(boolean changeTo, int serviceId) throws SQLException {
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery("CALL changeServiceStatus("+changeTo+", "+serviceId+")");
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
+
+    public boolean handleEditService(String name, double price, int serviceId) throws SQLException{
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            String query = "CALL editService('"+name+"', "+price+","+serviceId+")";
+            System.out.println(query);
+            result = statement.executeQuery(query);
+            System.out.println(result.toString());
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
+    }
+
+    public boolean handleCreateService(String name, double price) throws SQLException{
+        try{
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery("CALL createService('"+name+"', "+price+")");
+            return true;
+        }catch(SQLException ex){
+            return false;
+        }finally {
+            connection.close();
+        }
     }
 
     public ArrayList<Services> getListServices() throws SQLException {
 
         ArrayList<Services> services = new ArrayList<>();
-        Connection con = null;
-        ResultSet result = null;
-        Statement statement = null;
+
 
         try {
-            con = DatabaseConnection.getConnection();
-            statement = con.createStatement();
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
             result = statement.executeQuery("SELECT * FROM Service");
 
             Services service;
@@ -40,7 +80,7 @@ public class ServiceDao {
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            con.close();
+            connection.close();
         }
         return services;
     }

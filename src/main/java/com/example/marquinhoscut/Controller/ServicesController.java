@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ServicesController extends AdminBar {
 	public ServicesController(){
@@ -74,7 +75,6 @@ public class ServicesController extends AdminBar {
 
 	@FXML
 	void onChange() {
-
 		gridPane.getChildren().clear();
 		ArrayList<Services> filteredList = new ArrayList();
 		filteredList.addAll(services);
@@ -83,7 +83,7 @@ public class ServicesController extends AdminBar {
 					!item.getName().toLowerCase().contains(searchField.getText().toLowerCase()));
 		}
 		if(filteredList.size() > 0){
-			filteredList.sort((a,b)->a.getName().compareTo(b.getName()));
+			filteredList.sort(Comparator.comparing(Services::getName));
 			for (Services services : filteredList){
 				handleCreatePane(services.getName(),services.getValue());
 			}

@@ -65,6 +65,9 @@ insert into qtdService ( sellingId, serviceId,quantity) values
 (1, 1, 2),
 (1, 2, 3);
 
+
+-- Professional Procedures
+
 DELIMITER |
 CREATE PROCEDURE createProfessional (nameParam VARCHAR(100), cpfParam VARCHAR(15))
        BEGIN
@@ -91,6 +94,33 @@ CREATE PROCEDURE changeProfessionalStatus (changeTo BOOLEAN,professionalIdParam 
 		END |
 
 CALL changeProfessionalStatus(FALSE, 8);
+
+-- Service Procedures
+
+DELIMITER |
+CREATE PROCEDURE createService (nameParam VARCHAR(100), priceParam DOUBLE)
+       BEGIN
+		   INSERT INTO Service (price, serviceName, isActive) VALUES
+		  (priceParam, nameParam, TRUE);
+		END |
+
+CALL createService("Topete Ney",10.0);
+
+DELIMITER |
+CREATE PROCEDURE editService (nomeParam VARCHAR(100), priceParam DOUBLE, serviceIdParam INTEGER)
+       BEGIN
+         UPDATE Service SET serviceName = nomeParam, price = priceParam WHERE serviceId = serviceIdParam;
+		END |
+
+CALL editService("Corte Pica",100.0, 1);
+
+DELIMITER |
+CREATE PROCEDURE changeServiceStatus (changeTo BOOLEAN,serviceIdParam INTEGER)
+       BEGIN
+         UPDATE Service SET isActive = changeTo WHERE serviceId = serviceIdParam;
+		END |
+
+CALL changeServiceStatus(TRUE, 2);
 
 
 
