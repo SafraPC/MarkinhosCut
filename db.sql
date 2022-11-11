@@ -31,9 +31,11 @@ isActive BOOLEAN NOT NULL
 );
 
 CREATE TABLE qtdService(
+qtdId INTEGER AUTO_INCREMENT PRIMARY KEY,
 serviceId INTEGER NOT NULL,
 sellingId INTEGER NOT NULL,
 quantity INTEGER NOT NULL,
+price DOUBLE NOT NULL,
 FOREIGN KEY (serviceId) REFERENCES Service (serviceId),
 FOREIGN KEY (sellingId) REFERENCES Selling (sellingId)
 ON DELETE CASCADE
@@ -61,9 +63,9 @@ INSERT INTO PaymentMethod (paymentName) values
 INSERT INTO Selling (cpf, paymentName, total, sellingDate) values
 ("48663164890", "Pix", 0, '2020-03-01');
 
-insert into qtdService ( sellingId, serviceId,quantity) values
-(1, 1, 2),
-(1, 2, 3);
+insert into qtdService ( sellingId, serviceId,quantity,price) values
+(1, 1, 2, 10.0),
+(1, 2, 3, 10.0);
 
 
 -- Professional Procedures
@@ -122,6 +124,26 @@ CREATE PROCEDURE changeServiceStatus (changeTo BOOLEAN,serviceIdParam INTEGER)
 
 CALL changeServiceStatus(TRUE, 2);
 
+-- SELLINGS
+
+DELIMITER |
+CREATE PROCEDURE createSelling (cpfParam VARCHAR(20) ,paymentParam VARCHAR(20), totalParam DOUBLE,sellingDateParam DATE)
+       BEGIN
+       INSERT INTO Selling (cpf, paymentName, total, sellingDate) VALUES
+	  (cpfParam,paymentParam ,totalParam, sellingDateParam);
+	   SELECT LAST_INSERT_ID() as createdElementId;
+	   END |
+
+CALL createSelling('48663164890',"Pix",200.0,'2020-03-01');
+
+DELIMITER |
+CREATE PROCEDURE createQtdSellingService (sellingIdParam INTEGER, serviceIdParam INTEGER, quantityParam INTEGER, priceParam DOUBLE)
+       BEGIN
+       INSERT INTO qtdService (sellingId, serviceId,quantity,price) values
+	   (sellingIdParam, serviceIdParam, quantityParam, priceParam);
+		END |
+
+CALL createQtdSellingService(1,4,2,10.0);
 
 
 
