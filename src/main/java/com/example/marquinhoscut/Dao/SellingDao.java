@@ -41,6 +41,7 @@ public class SellingDao extends CallDatabase {
         return listResultCharts;
     }
 
+
     public ArrayList<Selling> getListSelling() throws SQLException {
         ArrayList<Selling> listSelling = new ArrayList<>();
         try {

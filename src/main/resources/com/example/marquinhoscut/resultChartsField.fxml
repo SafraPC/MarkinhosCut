@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.text.Font?>
+
+
+<LineChart fx:id="ResultChart" prefHeight="532.0" prefWidth="788.0" title="Curva De Faturamento" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <xAxis>
+      <CategoryAxis fx:id="Date" label="Data" side="BOTTOM" />
+   </xAxis>
+   <yAxis>
+      <NumberAxis fx:id="Value" label="Valores(R$)" side="LEFT" upperBound="500.0">
+         <tickLabelFont>
+            <Font size="12.0" />
+         </tickLabelFont>
+      </NumberAxis>
+   </yAxis>
+</LineChart>
