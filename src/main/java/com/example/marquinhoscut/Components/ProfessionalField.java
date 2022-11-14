@@ -1,6 +1,7 @@
 package com.example.marquinhoscut.Components;
 import com.example.marquinhoscut.Dao.ProfessionalDao;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
+import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +19,6 @@ public class ProfessionalField extends AdminBar {
 	
 	private String name,cpf,inactiveButtonName;
 	private int id;
-
 	private boolean isActivated = false;
 	private boolean isEditing = false;
 	private ProfessionalDao professionalDao = new ProfessionalDao();
@@ -54,11 +54,14 @@ public class ProfessionalField extends AdminBar {
 			return;
 		}
 		try {
-			if(professionalDao.handleChangeProfessionalStatus(!isActivated,id)){
-				setActivated(!isActivated);
-				inactiveButtonName = isActivated ? "Inativar" : "Ativar";
+			if(DialogMessage.confirmationDialog("Confirme sua ação","Deseja realmente "+(isActivated?"inativar":"ativar")+": "+name+" ?")) {
+				if (professionalDao.handleChangeProfessionalStatus(!isActivated, id)) {
+					setActivated(!isActivated);
+					inactiveButtonName = isActivated ? "Inativar" : "Ativar";
+				}
 			}
 		} catch (SQLException e) {
+			DialogMessage.errorMessage("Error","Houve um erro ao alterar o status do profissional!");
 			throw new RuntimeException(e);
 		}
 	}
@@ -68,6 +71,12 @@ public class ProfessionalField extends AdminBar {
 		correctButtonStatus();
 		if(isEditing){
 			try {
+				if(cpfField.getText().length() != 11){
+					DialogMessage.errorMessage("Error","O CPF não contém 11 dígitos, contém : "+cpfField.getText().length());
+					setCpf(cpf);
+					setName(name);
+					return;
+				}
 				if(professionalDao.handleEditProfessional(nameField.getText(),cpfField.getText(),id)){
 					setCpf(cpfField.getText());
 					setName(nameField.getText());
@@ -76,6 +85,7 @@ public class ProfessionalField extends AdminBar {
 				setCpf(cpf);
 				setName(name);
 			} catch (Exception e) {
+				DialogMessage.errorMessage("Error","Houve um erro de validação, verifique os campos.");
 				setCpf(cpf);
 				setName(name);
 			}finally {

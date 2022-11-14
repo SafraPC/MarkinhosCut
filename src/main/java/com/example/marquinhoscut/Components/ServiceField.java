@@ -46,14 +46,13 @@ public class ServiceField {
 			return;
 		}
 		try {
-			if(DialogMessage.confirmationDialog("Deseja realmente "+(isActive?"inativar":"ativar")+": "+name+" ?","Confirme sua ação")){
+			if(DialogMessage.confirmationDialog("Confirme sua ação","Deseja realmente "+(isActive?"inativar":"ativar")+": "+name+" ?")){
 				if(serviceDao.handleChangeServiceStatus(!isActive,id)){
 					setActive(!isActive);
 				}
 			}
-
-
 		} catch (SQLException e) {
+			DialogMessage.errorMessage("Error","Houve um erro ao alterar o status do serviço!");
 			throw new RuntimeException(e);
 		}
 	}
@@ -69,6 +68,7 @@ public class ServiceField {
 					return;
 				}
 			} catch (Exception e) {
+				DialogMessage.errorMessage("Error","Houve um erro de validação, verifique os campos.");
 				setPrice(price);
 				setName(name);
 			}finally {

@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 
 public class MySQLValidation {
 
-    public static boolean NO_UPDATED_ROWS(ResultSet result){
+    public static boolean NO_UPDATED_ROWS(String result){
         try{
-            if(result.toString().contains("update count of 0") || result == null){
-                DialogMessage.errorMessage("Erro!","Houve um erro e nada foi alterado.");
+            if(result == null || result.contains("update count of 0")){
+                DialogMessage.errorMessage("Nada foi alterado!","Houve um erro e nada foi alterado.");
                 return true;
             }
             return false;
@@ -16,21 +16,24 @@ public class MySQLValidation {
         }
     }
 
-    public static boolean ALREADY_EXISTS(ResultSet result){
+    public static boolean ALREADY_EXISTS(String result){
         try{
-
+            if(result.toLowerCase().contains("duplicate entry")){
+                DialogMessage.errorMessage("Não é permitido itens duplicados!","O registro que está tentando cadastrar já existe na base de dados!");
+                return true;
+            }
             return false;
         }catch (Exception err){
             return true;
         }
     }
 
-    public static boolean HAS_ERRORS(ResultSet result){
+    public static boolean HAS_ERRORS(String result){
         try{
-            if(ALREADY_EXISTS(result)){
+            if(NO_UPDATED_ROWS(result)){
                 return true;
             }
-            if(NO_UPDATED_ROWS(result)){
+            if(ALREADY_EXISTS(result)){
                 return true;
             }
             return false;

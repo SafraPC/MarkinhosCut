@@ -19,12 +19,12 @@ public class SellingDao extends CallDatabase {
 
     public boolean handleSelling (String cpf, String payment, double total, String date) throws SQLException {
         String query = "CALL createSelling('"+cpf+"', '"+payment+"', "+total+", '"+date+"')";
-        return callDatabase(query,"Houve um erro ao realizar a venda!");
+        return callDatabase(query,"Houve um erro ao realizar a venda!","Sucesso ao cadastrar nova venda!");
     }
 
     public boolean handleSellingService (int id, int serviceId, int qtd, double price) throws SQLException {
         String query = "CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")";
-        return callDatabase(query,"CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")");
+        return callDatabase(query,"","");
     }
 
     public ArrayList<ResultCharts> getListTotalDay() throws SQLException{
