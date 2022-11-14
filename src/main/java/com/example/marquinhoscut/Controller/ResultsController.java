@@ -62,7 +62,7 @@ public class ResultsController extends AdminBar {
 	}
 
 	@FXML
-	private void handleAddNewSection() {
+	private void handleAddGraphics() {
 		try{
 			gridPane.getChildren().clear();
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resultChartsField.fxml"));
