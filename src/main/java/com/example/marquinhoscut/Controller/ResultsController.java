@@ -6,6 +6,7 @@ import com.example.marquinhoscut.Dao.ProfessionalDao;
 import com.example.marquinhoscut.Dao.SellingDao;
 import com.example.marquinhoscut.Model.PaymentMethod;
 import com.example.marquinhoscut.Model.Professional;
+import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Model.Selling;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import javafx.fxml.FXML;
@@ -15,7 +16,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,12 +37,15 @@ public class ResultsController extends AdminBar {
 
 	@FXML
 	private ChoiceBox<String> CBbarber;
+	@FXML
+	private Label toReceive;
 
 
 	private ArrayList<Professional> professionals = new ArrayList<>();
 	private ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
 
 	ArrayList<Selling> sellings = new ArrayList<>();
+	ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
 
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
@@ -62,6 +68,8 @@ public class ResultsController extends AdminBar {
 			SellingDao sellingDao = new SellingDao();
 			sellings.addAll(sellingDao.getListSelling());
 
+			listResultCharts.addAll(sellingDao.getListTotalDay());
+
 		}catch(Exception err){
 			System.out.println(err.getMessage());
 		}
@@ -75,13 +83,26 @@ public class ResultsController extends AdminBar {
 		}
 	}
 	public void CreateGraphics(LineChart resultChart){
-		XYChart.Series<String,Number> series3 = new XYChart.Series<>();
-		series3.setName("vendas");
-		for(Selling selling:sellings){
-			series3.getData().add(new XYChart.Data<>(selling.getSellingDate(),selling.getTotal()));
-			System.out.println(selling.getSellingDate());
+		XYChart.Series<String,Double> invoicing = new XYChart.Series<>();
+		invoicing.setName("vendas");
+		for(ResultCharts resultCharts: listResultCharts){
+			invoicing.getData().add(new XYChart.Data<>(resultCharts.getSellingDate().toString(),resultCharts.getTotalDate()));
+			System.out.println(resultCharts.getSellingDate());
 		}
-		resultChart.getData().addAll(series3);
+		resultChart.getData().addAll(invoicing);
+	}
+	public String Sumtotal(){
+		try {
+			double sumTotal=0;
+			for(Selling selling:sellings){
+				sumTotal+= selling.getTotal();
+				System.out.println(selling.getSellingDate());
+			}
+			return NumberFormat.getCurrencyInstance().format(sumTotal);
+		}catch(Exception err){
+		System.out.println(err.getMessage());
+		return "";
+		}
 
 	}
 }

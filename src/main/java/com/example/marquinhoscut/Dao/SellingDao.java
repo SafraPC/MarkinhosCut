@@ -1,14 +1,12 @@
 package com.example.marquinhoscut.Dao;
 
 import com.example.marquinhoscut.Model.PaymentMethod;
+import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Model.Selling;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +48,20 @@ public class SellingDao {
         }finally {
             connection.close();
         }
+    }
+
+    public ArrayList<ResultCharts> getListTotalDay() throws SQLException{
+        ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
+        connection = DatabaseConnection.getConnection();
+        statement = connection.createStatement();
+        result = statement.executeQuery("SELECT sellingDate, sum(total) as totalDate FROM selling group by sellingDate;");
+        ResultCharts resultCharts;
+        while (result.next()) {
+            resultCharts = new ResultCharts(result.getDouble("totalDate"),
+                    result.getDate("sellingDate"));
+            listResultCharts.add(resultCharts);
+        }
+        return listResultCharts;
     }
 
     public ArrayList<Selling> getListSelling() throws SQLException {
