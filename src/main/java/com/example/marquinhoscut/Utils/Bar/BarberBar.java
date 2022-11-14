@@ -34,7 +34,7 @@ public class BarberBar extends Bar{
 		dialog.setTitle("Login");
 		dialog.setHeaderText("Insira a senha do administrador");
 		dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-		
+
 		PasswordField pwd = new PasswordField();
 		HBox content = new HBox();
 		content.setAlignment(Pos.CENTER_LEFT);

@@ -1,9 +1,11 @@
 package com.example.marquinhoscut.Components;
 
 import com.example.marquinhoscut.Dao.ServiceDao;
+import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -44,9 +46,13 @@ public class ServiceField {
 			return;
 		}
 		try {
-			if(serviceDao.handleChangeServiceStatus(!isActive,id)){
-				setActive(!isActive);
+			if(DialogMessage.confirmationDialog("Deseja realmente "+(isActive?"inativar":"ativar")+": "+name+" ?","Confirme sua ação")){
+				if(serviceDao.handleChangeServiceStatus(!isActive,id)){
+					setActive(!isActive);
+				}
 			}
+
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

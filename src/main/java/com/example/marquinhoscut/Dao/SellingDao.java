@@ -3,6 +3,7 @@ package com.example.marquinhoscut.Dao;
 import com.example.marquinhoscut.Model.PaymentMethod;
 import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Model.Selling;
+import com.example.marquinhoscut.ServicesDB.CallDatabase;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
 
@@ -11,50 +12,26 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SellingDao {
+public class SellingDao extends CallDatabase {
     Connection connection;
     ResultSet result;
     Statement statement ;
 
     public boolean handleSelling (String cpf, String payment, double total, String date) throws SQLException {
-        try{
-            connection = DatabaseConnection.getConnection();
-            statement = connection.createStatement();
-            result = statement.executeQuery("CALL createSelling('"+cpf+"', '"+payment+"', "+total+", '"+date+"')");
-            System.out.println(result.toString());
-            if(MySQLValidation.NO_UPDATED_ROWS(result)){
-                return false;
-            }
-            return true;
-        }catch(SQLException ex){
-            System.out.println("Erro: "+ex.getMessage());
-            return false;
-        }finally {
-            connection.close();
-        }
+        String query = "CALL createSelling('"+cpf+"', '"+payment+"', "+total+", '"+date+"')";
+        return callDatabase(query,"Houve um erro ao realizar a venda!");
     }
 
     public boolean handleSellingService (int id, int serviceId, int qtd, double price) throws SQLException {
-        try{
-            connection = DatabaseConnection.getConnection();
-            statement = connection.createStatement();
-            result = statement.executeQuery("CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")");
-            if(MySQLValidation.NO_UPDATED_ROWS(result)){
-                return false;
-            }
-            return true;
-        }catch(SQLException ex){
-            return false;
-        }finally {
-            connection.close();
-        }
+        String query = "CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")";
+        return callDatabase(query,"CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")");
     }
 
     public ArrayList<ResultCharts> getListTotalDay() throws SQLException{
         ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
         connection = DatabaseConnection.getConnection();
         statement = connection.createStatement();
-        result = statement.executeQuery("SELECT sellingDate, sum(total) as totalDate FROM selling group by sellingDate;");
+        result = statement.executeQuery("SELECT sellingDate, sum(total) as totalDate FROM Selling group by sellingDate;");
         ResultCharts resultCharts;
         while (result.next()) {
             resultCharts = new ResultCharts(result.getDouble("totalDate"),

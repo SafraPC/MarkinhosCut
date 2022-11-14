@@ -1,8 +1,10 @@
 package com.example.marquinhoscut.Dao;
 
 import com.example.marquinhoscut.Model.Professional;
+import com.example.marquinhoscut.ServicesDB.CallDatabase;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
+import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,65 +14,29 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProfessionalDao {
-
-    Connection connection;
-    ResultSet result;
-    Statement statement ;
-
-
+public class ProfessionalDao extends CallDatabase {
     public boolean handleChangeProfessionalStatus(boolean changeTo, int professionalId) throws SQLException {
-        try{
-            connection = DatabaseConnection.getConnection();
-            statement = connection.createStatement();
-            result = statement.executeQuery("CALL changeProfessionalStatus("+changeTo+", "+professionalId+")");
-            if(MySQLValidation.NO_UPDATED_ROWS(result)){
-                return false;
-            }
-            return true;
-        }catch(SQLException ex){
-            return false;
-        }finally {
-            connection.close();
-        }
+        String query = "CALL changeProfessionalStatus("+changeTo+", "+professionalId+")";
+        return callDatabase(query,"Houve um erro ao alterar o status do profissional");
     }
 
     public boolean handleEditProfessional(String name, String cpf, int professionalId) throws SQLException{
-        try{
-            connection = DatabaseConnection.getConnection();
-            statement = connection.createStatement();
-            String query = "CALL editProfessional('"+name+"', "+cpf+","+professionalId+")";
-            result = statement.executeQuery(query);
-            if(MySQLValidation.NO_UPDATED_ROWS(result)){
-                return false;
-            }
-            return true;
-        }catch(SQLException ex){
-            return false;
-        }finally {
-            connection.close();
-        }
+       String query = "CALL editProfessional('"+name+"', "+cpf+","+professionalId+")";
+       return callDatabase(query,"Houve um erro ao editar o profissional");
     }
 
     public boolean handleCreateProfessional(String name, String cpf) throws SQLException{
-        try{
-            connection = DatabaseConnection.getConnection();
-            statement = connection.createStatement();
-            result = statement.executeQuery("CALL createProfessional('"+name+"', "+cpf+")");
-            if(MySQLValidation.NO_UPDATED_ROWS(result)){
-                return false;
-            }
-            return true;
-        }catch(SQLException ex){
-            return false;
-        }finally {
-            connection.close();
-        }
+        String query = "CALL createProfessional('"+name+"', "+cpf+")";
+        return callDatabase(query,"Houve um erro ao criar o profissional");
     }
-
 
     public ArrayList<Professional> getListProfessional() throws SQLException {
         ArrayList<Professional> professionals = new ArrayList<>();
+
+        Connection connection = null;
+        ResultSet result;
+        Statement statement;
+
         try {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
@@ -85,8 +51,7 @@ public class ProfessionalDao {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ProfessionalDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
+            DialogMessage.errorMessage("Erro!","Houve um erro ao listar os profissionais");
         } finally {
             connection.close();
         }
