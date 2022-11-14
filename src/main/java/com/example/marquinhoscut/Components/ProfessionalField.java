@@ -71,6 +71,12 @@ public class ProfessionalField extends AdminBar {
 		correctButtonStatus();
 		if(isEditing){
 			try {
+				if(cpfField.getText().length() != 11){
+					DialogMessage.errorMessage("Error","O CPF não contém 11 dígitos, contém : "+cpfField.getText().length());
+					setCpf(cpf);
+					setName(name);
+					return;
+				}
 				if(professionalDao.handleEditProfessional(nameField.getText(),cpfField.getText(),id)){
 					setCpf(cpfField.getText());
 					setName(nameField.getText());
