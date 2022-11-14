@@ -17,17 +17,20 @@ import java.util.logging.Logger;
 public class ProfessionalDao extends CallDatabase {
     public boolean handleChangeProfessionalStatus(boolean changeTo, int professionalId) throws SQLException {
         String query = "CALL changeProfessionalStatus("+changeTo+", "+professionalId+")";
-        return callDatabase(query,"Houve um erro ao alterar o status do profissional");
+        return callDatabase(query,"Houve um erro ao alterar o status do profissional",
+                "Sucesso ao alterar status do profissional!");
     }
 
     public boolean handleEditProfessional(String name, String cpf, int professionalId) throws SQLException{
        String query = "CALL editProfessional('"+name+"', "+cpf+","+professionalId+")";
-       return callDatabase(query,"Houve um erro ao editar o profissional");
+       return callDatabase(query,"Houve um erro ao editar o profissional",
+               "Sucesso ao editar profissional!");
     }
 
     public boolean handleCreateProfessional(String name, String cpf) throws SQLException{
         String query = "CALL createProfessional('"+name+"', "+cpf+")";
-        return callDatabase(query,"Houve um erro ao criar o profissional");
+        return callDatabase(query,"Houve um erro ao criar o profissional",
+                "Sucesso ao cadastrar novo profissional");
     }
 
     public ArrayList<Professional> getListProfessional() throws SQLException {

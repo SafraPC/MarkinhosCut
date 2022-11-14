@@ -20,17 +20,20 @@ public class ServiceDao extends CallDatabase {
 
     public boolean handleChangeServiceStatus(boolean changeTo, int serviceId) throws SQLException {
         String query = "CALL changeServiceStatus("+changeTo+", "+serviceId+")";
-        return callDatabase(query,"Ocorreu um erro ao alterar o status do serviço!");
+        return callDatabase(query,"Ocorreu um erro ao alterar o status do serviço!",
+                "Sucesso ao alterar o status do serviço!");
     }
 
     public boolean handleEditService(String name, double price, int serviceId) throws SQLException{
         String query = "CALL editService('"+name+"', "+price+","+serviceId+")";
-        return callDatabase(query,"Ocorreu um erro ao alterar um serviço!");
+        return callDatabase(query,"Ocorreu um erro ao alterar um serviço!",
+                "Sucesso ao editar o serviço!");
     }
 
     public boolean handleCreateService(String name, double price) throws SQLException{
         String query = "CALL createService('"+name+"', "+price+")";
-        return callDatabase(query,"Houve um erro ao criar um novo serviço!");
+        return callDatabase(query,"Houve um erro ao criar um novo serviço!",
+                "Sucesso ao criar o serviço!");
     }
 
     public ArrayList<Services> getListServices() throws SQLException {

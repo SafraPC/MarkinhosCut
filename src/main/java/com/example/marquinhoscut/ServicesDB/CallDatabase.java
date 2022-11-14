@@ -15,16 +15,22 @@ public class CallDatabase {
     Statement statement ;
 
 
-    public boolean callDatabase(String query,String errorMessage) throws SQLException {
+    public boolean callDatabase(String query,String errorMessage, String successMessage) throws SQLException {
         try{
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             result = statement.executeQuery(query);
-            if(MySQLValidation.HAS_ERRORS(result)){
+            if(MySQLValidation.HAS_ERRORS(result.toString())){
                 return false;
+            }
+            if(successMessage.length() > 0){
+                DialogMessage.successMessage("Sucesso!",successMessage);
             }
             return true;
         }catch(SQLException ex){
+            if(MySQLValidation.HAS_ERRORS(ex.getMessage())){
+                return false;
+            }
             DialogMessage.errorMessage("Erro!",errorMessage);
             return false;
         }finally {
