@@ -32,15 +32,10 @@ import java.util.Date;
 
 public class ResultsController extends AdminBar {
 
-	@FXML
-	private CategoryAxis Date;
 
 	@FXML
-	private LineChart<String,Number> ResultChart;
-	@FXML
 	private GridPane gridPane;
-	@FXML
-	private NumberAxis Value;
+
 	@FXML
 	private ChoiceBox<String> CBPaymentMethod;
 
@@ -54,7 +49,7 @@ public class ResultsController extends AdminBar {
 	private ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
 
 	ArrayList<Selling> sellings = new ArrayList<>();
-	ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
+
 
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
@@ -69,11 +64,10 @@ public class ResultsController extends AdminBar {
 	@FXML
 	private void handleAddNewSection() {
 		try{
-
-			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resultChartsFiled.fxml"));
+			gridPane.getChildren().clear();
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resultChartsField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
-			SellingField controller = fxmlLoader.getController();
 
 			gridPane.add(ap, 0, gridPane.getRowCount());
 
@@ -93,8 +87,6 @@ public class ResultsController extends AdminBar {
 			SellingDao sellingDao = new SellingDao();
 			sellings.addAll(sellingDao.getListSelling());
 
-			ResultChartsDao resultChartsDao = new ResultChartsDao();
-			listResultCharts.addAll(resultChartsDao.getListTotalDay());
 
 		}catch(Exception err){
 			System.out.println(err.getMessage());
@@ -108,15 +100,7 @@ public class ResultsController extends AdminBar {
 			CBPaymentMethod.getItems().add(paymentMethod.getName());
 		}
 	}
-	public void CreateGraphics(LineChart resultChart){
-		XYChart.Series<String,Double> invoicing = new XYChart.Series<>();
-		invoicing.setName("vendas");
-		for(ResultCharts resultCharts: listResultCharts){
-			invoicing.getData().add(new XYChart.Data<>(resultCharts.getSellingDate().toString(),resultCharts.getTotalDate()));
-			System.out.println(resultCharts.getSellingDate());
-		}
-		resultChart.getData().addAll(invoicing);
-	}
+
 	public String Sumtotal(){
 		try {
 			double sumTotal=0;

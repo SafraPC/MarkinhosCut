@@ -41,13 +41,15 @@
         </Pane>
         <ScrollPane fitToWidth="true" layoutY="216.0" prefHeight="535.0" prefWidth="750.0" style="-fx-border-color: Grey; -fx-background-color: white;">
             <content>
-                <GridPane fx:id="gridPane" prefHeight="531.0" prefWidth="746.0" style="-fx-background-color: white;">
+                <GridPane fx:id="gridPane" prefHeight="535.0" prefWidth="750.0" style="-fx-background-color: white;">
                     <columnConstraints>
                         <ColumnConstraints />
+                  <ColumnConstraints />
                   <ColumnConstraints />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints />
+                  <RowConstraints />
                   <RowConstraints />
                     </rowConstraints>
                 </GridPane>
