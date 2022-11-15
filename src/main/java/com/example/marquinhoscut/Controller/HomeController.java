@@ -130,6 +130,7 @@ public class HomeController extends BarberBar {
 			}
 			if(success){
 				gridPane.getChildren().clear();
+				controllers.clear();
 			}
 		}catch (Exception err){
 			System.out.println(err.getMessage());
