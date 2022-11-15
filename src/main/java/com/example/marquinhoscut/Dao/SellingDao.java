@@ -6,6 +6,7 @@ import com.example.marquinhoscut.Model.Selling;
 import com.example.marquinhoscut.ServicesDB.CallDatabase;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
+import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,14 +18,40 @@ public class SellingDao extends CallDatabase {
     ResultSet result;
     Statement statement ;
 
-    public boolean handleSelling (String cpf, String payment, double total, String date) throws SQLException {
-        String query = "CALL createSelling('"+cpf+"', '"+payment+"', "+total+", '"+date+"')";
-        return callDatabase(query,"Houve um erro ao realizar a venda!","Sucesso ao cadastrar nova venda!");
+    public int handleSelling (String cpf, String payment, double total, String date) throws SQLException {
+        try{
+            int registeredItem = -1;
+            String query = "CALL createSelling('"+cpf+"', '"+payment+"', "+total+", '"+date+"')";
+            connection = DatabaseConnection.getConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery(query);
+            if(MySQLValidation.HAS_ERRORS(result.toString())){
+                return registeredItem;
+            }
+            if(result != null){
+                while(result.next()){
+                    registeredItem = Integer.parseInt(result.getString("createdElementId"));
+                }
+                DialogMessage.successMessage("Sucesso!","Venda registrada com sucesso!");
+                return registeredItem;
+            }
+            DialogMessage.errorMessage("Erro!","Houve um erro ao registrar a venda.");
+            return registeredItem;
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            if(MySQLValidation.HAS_ERRORS(ex.getMessage())){
+                return -1;
+            }
+            DialogMessage.errorMessage("Erro!","Houve um erro ao registrar a venda.");
+            return -1;
+        }finally {
+            connection.close();
+        }
     }
 
     public boolean handleSellingService (int id, int serviceId, int qtd, double price) throws SQLException {
         String query = "CALL createQtdSellingService("+id+", "+serviceId+", "+qtd+", "+price+")";
-        return callDatabase(query,"","");
+        return callDatabase(query,"Erro ao registrar quantidade de serviços!","");
     }
 
     public ArrayList<ResultCharts> getListTotalDay() throws SQLException{

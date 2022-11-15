@@ -26,7 +26,7 @@ FOREIGN KEY (paymentName) REFERENCES PaymentMethod (paymentName)
 CREATE TABLE Service(
 serviceId INTEGER AUTO_INCREMENT PRIMARY KEY,
 price DOUBLE NOT NULL,
-serviceName VARCHAR (100) NOT NULL,
+serviceName VARCHAR (100) NOT NULL UNIQUE,
 isActive BOOLEAN NOT NULL
 );
 
@@ -146,5 +146,6 @@ CREATE PROCEDURE createQtdSellingService (sellingIdParam INTEGER, serviceIdParam
 CALL createQtdSellingService(1,4,2,10.0);
 
 
-
+SELECT * FROM Selling;
+SELECT * FROM qtdService;
 
