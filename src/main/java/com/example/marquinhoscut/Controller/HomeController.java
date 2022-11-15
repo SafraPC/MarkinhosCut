@@ -120,11 +120,10 @@ public class HomeController extends BarberBar {
 						break;
 					}
 				}
-
 				if(serviceId == -1){
-					return;
+					break;
 				}
-				success = !sellingDao.handleSellingService(id, serviceId,qtd,price);
+				success = sellingDao.handleSellingService(id, serviceId,qtd,price);
 				if(!success){
 					break;
 				}
