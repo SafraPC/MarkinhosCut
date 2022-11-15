@@ -18,7 +18,7 @@ public class ResultChartsDao {
         ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
         connection = DatabaseConnection.getConnection();
         statement = connection.createStatement();
-        result = statement.executeQuery("SELECT sellingDate, sum(total) as totalDate FROM selling group by sellingDate;");
+        result = statement.executeQuery("SELECT sellingDate, sum(total) as totalDate FROM Selling group by sellingDate;");
         ResultCharts resultCharts;
         while (result.next()) {
             resultCharts = new ResultCharts(result.getDouble("totalDate"),
