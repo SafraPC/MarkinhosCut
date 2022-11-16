@@ -26,7 +26,7 @@ FOREIGN KEY (paymentName) REFERENCES PaymentMethod (paymentName)
 CREATE TABLE Service(
 serviceId INTEGER AUTO_INCREMENT PRIMARY KEY,
 price DOUBLE NOT NULL,
-serviceName VARCHAR (100) NOT NULL UNIQUE,
+serviceName VARCHAR (100) NOT NULL,
 isActive BOOLEAN NOT NULL
 );
 
@@ -145,7 +145,25 @@ CREATE PROCEDURE createQtdSellingService (sellingIdParam INTEGER, serviceIdParam
 
 CALL createQtdSellingService(1,4,2,10.0);
 
+SELECT * FROM Selling;
+
+
+SELECT sellingDate, sum(total) as totalDate FROM Selling INNER JOIN Professional using(cpf) WHERE
+sellingDate BETWEEN '2022-11-16' AND '2022-11-17' AND professionalName LIKE '%ma%'
+AND paymentName LIKE '%Pix%' group by sellingDate ;
+
+DELIMITER |
+CREATE PROCEDURE getResultCharts (dateInitialParam VARCHAR(20) ,dateFinalParam VARCHAR(20), 
+professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
+       BEGIN
+		   SELECT sellingDate, sum(total) as totalDate FROM Selling INNER JOIN Professional using(cpf) WHERE
+		   sellingDate BETWEEN dateInitialParam AND dateFinalParam AND professionalName LIKE professionalNameParam
+		   AND paymentName LIKE paymentNameParam GROUP BY sellingDate ORDER BY sellingDate ;
+	   END |
+
+CALL getResultCharts("2022-11-16","2022-11-17","%Ma%","%Pix%");
+CALL getResultCharts('2022-11-13','2022-11-15','%%','%Pix%');
+
+CALL getResultCharts("2022-11-11","2022-11-16","%Marcos%","%Pix%")
 
 SELECT * FROM Selling;
-SELECT * FROM qtdService;
-

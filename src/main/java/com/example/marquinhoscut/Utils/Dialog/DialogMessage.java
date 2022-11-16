@@ -37,7 +37,7 @@ public class DialogMessage {
 		Optional<ButtonType> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			try {
-				if (result.get().getText() == "Sim") {
+				if (result.get().getText().equals("Sim")) {
 					return true;
 				}
 				return false;

@@ -2,6 +2,7 @@
 package com.example.marquinhoscut.Controller;
 
 import com.example.marquinhoscut.App;
+import com.example.marquinhoscut.Components.ResultChartsField;
 import com.example.marquinhoscut.Components.SellingField;
 import com.example.marquinhoscut.Dao.PaymentMethodDao;
 import com.example.marquinhoscut.Dao.ProfessionalDao;
@@ -15,21 +16,16 @@ import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-import java.text.DateFormat;
+import java.sql.SQLOutput;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 public class ResultsController extends AdminBar {
 
@@ -37,16 +33,11 @@ public class ResultsController extends AdminBar {
 	@FXML
 	private GridPane gridPane;
 	@FXML
-	private DatePicker datePickerInitial;
+	private DatePicker datePickerInitial,datePickerEnd;
 
 	@FXML
-	private DatePicker datePickerEnd;
+	private ChoiceBox<String> CBPaymentMethod,CBbarber,CBview;
 
-	@FXML
-	private ChoiceBox<String> CBPaymentMethod;
-
-	@FXML
-	private ChoiceBox<String> CBbarber;
 	@FXML
 	private Label toReceive;
 
@@ -64,28 +55,69 @@ public class ResultsController extends AdminBar {
 	void initialize(){
 		handleNavigationBar(exitButton,servicesButton,professionalButton,resultsButton);
 		PopulateOptionsResults();
+		this.handleWatch();
 		//CreateGraphics(ResultChart);
 	}
 
-	@FXML
-	private void handleAddGraphics() {
+	private void handleWatch(){
+		this.CBbarber.setOnAction(item->{
+			this.handleAddGraphics();
+		});
+		this.CBPaymentMethod.setOnAction(item->{
+			this.handleAddGraphics();
+		});
+		this.datePickerInitial.setOnAction(item->{
+			this.handleAddGraphics();
+		});
+		this.datePickerEnd.setOnAction(item->{
+			this.handleAddGraphics();
+		});
+		this.CBview.setOnAction(item->{
+			this.handleAddGraphics();
+		});
+	}
+	
+	
+	private void handleCreateLineGraph(){
 		try{
-			//System.out.println("getDateInitial:"+getDateInitial()+"getDateEnd:"+ getDateEnd()+"getProfessional:"+getProfessional()+"getPaymentMethod:"+getPaymentMethod());
 			gridPane.getChildren().clear();
+			
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resultChartsField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
-
+			ResultChartsField controller = fxmlLoader.getController();
+			String selectedProfessional = CBbarber.getSelectionModel().getSelectedItem();
+			String selectedPayment = CBPaymentMethod.getSelectionModel().getSelectedItem();
+			String initialDate = datePickerInitial.getValue().toString();
+			String finalDate = datePickerEnd.getValue().toString();
+			
+			controller.createGraph(initialDate,
+					finalDate,selectedProfessional,selectedPayment);
+			
 			gridPane.add(ap, 0, gridPane.getRowCount());
-
 		}catch(Exception e){
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
 			System.out.println(e.getMessage());
 		}
+		
 	}
+	
+	@FXML
+	private void handleAddGraphics() {
+		try{
+			String selectedView = CBview.getSelectionModel().getSelectedItem();
+			if(selectedView.equals("Linhas")){
+				this.handleCreateLineGraph();
+				return;
+			}
+			this.handleCreateLineGraph();
+		}catch (Exception err){
+			System.out.println(err.getMessage());
+		}
+	}
+	
+	
 	public void PopulateOptionsResults(){
-
-
 		try{
 			ProfessionalDao professionalDao = new ProfessionalDao();
 			professionals.addAll(professionalDao.getListProfessional());
@@ -95,17 +127,23 @@ public class ResultsController extends AdminBar {
 
 			SellingDao sellingDao = new SellingDao();
 			sellings.addAll(sellingDao.getListSelling());
-
+			
+			CBview.getItems().addAll("Linhas","Gráfico");
+			CBview.setValue("Linhas");
+			
+			datePickerInitial.setValue(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()));
+			datePickerEnd.setValue(LocalDate.now());
+			
 
 		}catch(Exception err){
 			System.out.println(err.getMessage());
 		}
+		
 		for(Professional professional : professionals ){
 			CBbarber.getItems().add(professional.getName());
 		}
 
 		for(PaymentMethod paymentMethod : paymentMethods ){
-
 			CBPaymentMethod.getItems().add(paymentMethod.getName());
 		}
 	}
