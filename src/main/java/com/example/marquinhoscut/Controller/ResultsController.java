@@ -19,14 +19,15 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,6 +36,11 @@ public class ResultsController extends AdminBar {
 
 	@FXML
 	private GridPane gridPane;
+	@FXML
+	private DatePicker datePickerInitial;
+
+	@FXML
+	private DatePicker datePickerEnd;
 
 	@FXML
 	private ChoiceBox<String> CBPaymentMethod;
@@ -64,6 +70,7 @@ public class ResultsController extends AdminBar {
 	@FXML
 	private void handleAddGraphics() {
 		try{
+			//System.out.println("getDateInitial:"+getDateInitial()+"getDateEnd:"+ getDateEnd()+"getProfessional:"+getProfessional()+"getPaymentMethod:"+getPaymentMethod());
 			gridPane.getChildren().clear();
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resultChartsField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
@@ -77,6 +84,8 @@ public class ResultsController extends AdminBar {
 		}
 	}
 	public void PopulateOptionsResults(){
+
+
 		try{
 			ProfessionalDao professionalDao = new ProfessionalDao();
 			professionals.addAll(professionalDao.getListProfessional());

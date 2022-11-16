@@ -60,14 +60,14 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePicker" layoutX="25.0" layoutY="93.0" onAction="#handleAddGraphics" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <DatePicker fx:id="datePickerInitial" layoutX="25.0" layoutY="93.0" onAction="#handleAddGraphics" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="196.0" layoutY="67.0" opacity="0.8" prefHeight="20.0" prefWidth="73.0" text="Data Final">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <DatePicker fx:id="datePickerEnd" layoutX="194.0" layoutY="93.0" onAction="#handleAddGraphics" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-      <ChoiceBox fx:id="CBbarber" layoutX="358.0" layoutY="93.0" onAction="#handleAddGraphics" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <ChoiceBox fx:id="CBbarber" layoutX="358.0" layoutY="93.0" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="362.0" layoutY="67.0" opacity="0.8" text="Barbeiro">
          <font>
             <Font size="14.0" />
@@ -79,7 +79,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="CBview" layoutX="517.0" layoutY="165.0" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <ChoiceBox fx:id="CBview" layoutX="517.0" layoutY="165.0" onAction="#handleAddGraphics" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="521.0" layoutY="139.0" opacity="0.8" prefHeight="20.0" prefWidth="93.0" text="Visualização">
          <font>
             <Font size="14.0" />
@@ -95,6 +95,5 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="searchResults" layoutX="430.0" layoutY="170.0" mnemonicParsing="false" onAction="#Sumtotal" prefWidth="66.0" style="-fx-background-color: green;" text="Pesquisar" textFill="#ececec" />
     </children>
 </AnchorPane>

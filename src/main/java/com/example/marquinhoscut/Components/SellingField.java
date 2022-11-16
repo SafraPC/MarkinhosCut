@@ -69,7 +69,7 @@ public class SellingField {
 	}
 
 	@FXML
-	void onQtdChanges(KeyEvent event) {
+	void onQtdChanges() {
 		this.getCallback();
 	}
 
@@ -77,7 +77,7 @@ public class SellingField {
 		this.callback = thread;
 	}
 
-	public void editValue(ActionEvent event){
+	public void editValue(){
 		if(priceField.isEditable()){
 			priceField.setEditable(false);
 		}
