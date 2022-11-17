@@ -2,6 +2,8 @@
 package com.example.marquinhoscut.Controller;
 
 import com.example.marquinhoscut.App;
+import com.example.marquinhoscut.Components.ProfessionalField;
+import com.example.marquinhoscut.Components.RegisterSellingField;
 import com.example.marquinhoscut.Components.ResultChartsField;
 import com.example.marquinhoscut.Components.SellingField;
 import com.example.marquinhoscut.Dao.PaymentMethodDao;
@@ -20,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import java.sql.SQLException;
 import java.sql.SQLOutput;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -29,6 +32,11 @@ import java.util.Calendar;
 
 public class ResultsController extends AdminBar {
 
+	private ArrayList<RegisterSellingField> controllers = new ArrayList();
+	private ArrayList<Professional> professionals = new ArrayList<>();
+	private ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
+
+	ArrayList<Selling> listRegisterSelling = new ArrayList<>();
 
 	@FXML
 	private GridPane gridPane;
@@ -41,13 +49,6 @@ public class ResultsController extends AdminBar {
 	@FXML
 	private Label toReceive;
 
-
-	private ArrayList<Professional> professionals = new ArrayList<>();
-	private ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
-
-	ArrayList<Selling> sellings = new ArrayList<>();
-
-
 	@FXML
 	private Button exitButton,servicesButton,professionalButton,resultsButton;
 	
@@ -55,25 +56,25 @@ public class ResultsController extends AdminBar {
 	void initialize(){
 		handleNavigationBar(exitButton,servicesButton,professionalButton,resultsButton);
 		PopulateOptionsResults();
-		this.handleWatch();
-		//CreateGraphics(ResultChart);
+		handleWatch();
+
 	}
 
 	private void handleWatch(){
 		this.CBbarber.setOnAction(item->{
-			this.handleAddGraphics();
+			this.handleAddView();
 		});
 		this.CBPaymentMethod.setOnAction(item->{
-			this.handleAddGraphics();
+			this.handleAddView();
 		});
 		this.datePickerInitial.setOnAction(item->{
-			this.handleAddGraphics();
+			this.handleAddView();
 		});
 		this.datePickerEnd.setOnAction(item->{
-			this.handleAddGraphics();
+			this.handleAddView();
 		});
 		this.CBview.setOnAction(item->{
-			this.handleAddGraphics();
+			this.handleAddView();
 		});
 	}
 	
@@ -101,12 +102,47 @@ public class ResultsController extends AdminBar {
 		}
 		
 	}
-	
+	public void handleAddRegister(int id, String professional, String payment, String date, Double total){
+
+		try{
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegisterSellingField.fxml"));
+			AnchorPane scene = fxmlLoader.load();
+			AnchorPane ap = scene;
+			RegisterSellingField controller = fxmlLoader.getController();
+			controller.setId(id);
+			controller.setProfessional(professional);
+			controller.setPayment(payment);
+			controller.setDate(date);
+			controller.setTotal(total);
+			controllers.add(controller);
+
+			gridPane.add(ap, 0, gridPane.getRowCount());
+		}catch(Exception err){
+			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar uma nova registros!", Alert.AlertType.ERROR);
+			System.out.println(err.getMessage());
+		}
+
+	}
 	@FXML
-	private void handleAddGraphics() {
+	private void handleAddView() {
 		try{
 			String selectedView = CBview.getSelectionModel().getSelectedItem();
 			if(selectedView.equals("Linhas")){
+				gridPane.getChildren().clear();
+				System.out.println("entrei");
+				for(Selling selling : listRegisterSelling){
+					System.out.println(selling.getTotal());
+					int id = selling.getSellingId();
+					String professional = selling.getProfessional();
+					String payment = selling.getpaymentName();
+					String date = selling.getSellingDate();
+					Double total = selling.getTotal();
+					handleAddRegister(id,professional, payment,date, total);
+				}
+				queryResults();
+				return;
+			}
+			if(selectedView.equals("Gráfico")){
 				this.handleCreateLineGraph();
 				return;
 			}
@@ -118,21 +154,20 @@ public class ResultsController extends AdminBar {
 	
 	
 	public void PopulateOptionsResults(){
+
 		try{
+			datePickerInitial.setValue(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()));
+			datePickerEnd.setValue(LocalDate.now());
+
 			ProfessionalDao professionalDao = new ProfessionalDao();
 			professionals.addAll(professionalDao.getListProfessional());
 
 			PaymentMethodDao paymentMethodDao = new PaymentMethodDao();
 			paymentMethods.addAll(paymentMethodDao.getListPaymentMethod());
 
-			SellingDao sellingDao = new SellingDao();
-			sellings.addAll(sellingDao.getListSelling());
 			
 			CBview.getItems().addAll("Linhas","Gráfico");
 			CBview.setValue("Linhas");
-			
-			datePickerInitial.setValue(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()));
-			datePickerEnd.setValue(LocalDate.now());
 			
 
 		}catch(Exception err){
@@ -146,12 +181,27 @@ public class ResultsController extends AdminBar {
 		for(PaymentMethod paymentMethod : paymentMethods ){
 			CBPaymentMethod.getItems().add(paymentMethod.getName());
 		}
-	}
 
+	}
+	private void queryResults() throws SQLException {
+		try {
+			System.out.println("hello");
+			SellingDao sellingDao = new SellingDao();
+			listRegisterSelling.clear();
+			listRegisterSelling.addAll(sellingDao.getListSelling(datePickerInitial.getValue().toString(),
+					datePickerEnd.getValue().toString(),
+					CBbarber.getSelectionModel().getSelectedItem(),
+					CBPaymentMethod.getSelectionModel().getSelectedItem()));
+		}catch (Exception err){
+			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar uma nova registros!", Alert.AlertType.ERROR);
+			System.out.println(err);
+		}
+
+	}
 	public String Sumtotal(){
 		try {
 			double sumTotal=0;
-			for(Selling selling:sellings){
+			for(Selling selling:listRegisterSelling){
 				sumTotal+= selling.getTotal();
 				System.out.println(selling.getSellingDate());
 			}
@@ -162,4 +212,5 @@ public class ResultsController extends AdminBar {
 		}
 
 	}
+
 }

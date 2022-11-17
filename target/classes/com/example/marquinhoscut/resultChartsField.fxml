@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Components.ResultChartsField">
    <children>
-      <LineChart fx:id="ResultChart" layoutX="10.0" layoutY="10.0" title="Curva De Faturamento" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <LineChart fx:id="ResultChart" layoutX="10.0" layoutY="10.0" style="-fx-background-color: white;" title="Curva De Faturamento" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <xAxis>
             <CategoryAxis fx:id="Date" label="Data" side="BOTTOM" />
          </xAxis>

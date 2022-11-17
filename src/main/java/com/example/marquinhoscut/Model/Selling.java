@@ -12,16 +12,16 @@ import java.util.Date;
 
 public class Selling {
     private int sellingId;
-    private String cpf;
+    private String professional;
     private String paymentName;
     private Double total;
     private Date sellingDate;
     //private int serviceId;
     //private int quantity;
 
-    public Selling( int sellingId,String cpf, String paymentName, Double total, Date sellingDate){
+    public Selling( int sellingId,String professional, String paymentName, Double total, Date sellingDate){
         this.sellingId = new SimpleIntegerProperty(sellingId).get();
-        this.cpf = new SimpleStringProperty(cpf).get();
+        this.professional = new SimpleStringProperty(professional).get();
         this.paymentName = new SimpleStringProperty(paymentName).get();
         this.total = new SimpleDoubleProperty(total).get();
         this.sellingDate = sellingDate;
@@ -29,8 +29,8 @@ public class Selling {
     public int getSellingId(){
         return sellingId;
     }
-    public String getCpf(){
-        return cpf;
+    public String getProfessional(){
+        return professional;
     }
     public String getpaymentName(){
         return paymentName;
@@ -40,7 +40,6 @@ public class Selling {
     }
 
     public String getSellingDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(sellingDate);
+        return sellingDate.toString();
     }
 }

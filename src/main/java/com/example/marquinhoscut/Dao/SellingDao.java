@@ -54,31 +54,21 @@ public class SellingDao extends CallDatabase {
         return callDatabase(query,"Erro ao registrar quantidade de serviços!","");
     }
 
-    public ArrayList<ResultCharts> getListTotalDay() throws SQLException{
-        ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
+
+    public ArrayList<Selling> getListSelling(String dateInitial, String dateFinal, String professsional, String paymentMethod) throws SQLException {
+        ArrayList<Selling> listSelling = new ArrayList<>();
         connection = DatabaseConnection.getConnection();
         statement = connection.createStatement();
-        result = statement.executeQuery("SELECT sellingDate, sum(total) as totalDate FROM Selling group by sellingDate;");
-        ResultCharts resultCharts;
-        while (result.next()) {
-            resultCharts = new ResultCharts(result.getDouble("totalDate"),
-                    result.getDate("sellingDate"));
-            listResultCharts.add(resultCharts);
-        }
-        return listResultCharts;
-    }
-
-
-    public ArrayList<Selling> getListSelling() throws SQLException {
-        ArrayList<Selling> listSelling = new ArrayList<>();
         try {
-            connection = DatabaseConnection.getConnection();
-            statement = connection.createStatement();
-            result = statement.executeQuery("SELECT * FROM Selling;");
+            professsional = professsional != null ? professsional : "";
+            paymentMethod = paymentMethod != null ? paymentMethod : "";
+            String query = "CALL getRegisterSelling('"+dateInitial+"','"+dateFinal+"','%"+professsional+"%','%"+paymentMethod+"%');";
+            System.out.println(query);
+            result = statement.executeQuery(query);
             Selling selling;
             while (result.next()) {
                 selling = new Selling(result.getInt("sellingId"),
-                        result.getString("cpf"),
+                        result.getString("professionalName"),
                         result.getString("paymentName"),
                         result.getDouble("total"),
                         result.getDate("sellingDate"));
@@ -86,10 +76,14 @@ public class SellingDao extends CallDatabase {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(SellingDao.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
+            Logger.getLogger(SellingDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("teste");
         } finally {
             connection.close();
+        }
+        for(Selling selling : listSelling){
+            System.out.println(selling.getSellingId());
         }
         return listSelling;
     }

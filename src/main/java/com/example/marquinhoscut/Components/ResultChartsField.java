@@ -1,23 +1,16 @@
 package com.example.marquinhoscut.Components;
 
-import com.example.marquinhoscut.Controller.ResultsController;
-import com.example.marquinhoscut.Dao.PaymentMethodDao;
-import com.example.marquinhoscut.Dao.ProfessionalDao;
+
 import com.example.marquinhoscut.Dao.ResultChartsDao;
-import com.example.marquinhoscut.Dao.SellingDao;
-import com.example.marquinhoscut.Model.PaymentMethod;
-import com.example.marquinhoscut.Model.Professional;
+
 import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
-import java.sql.SQLOutput;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ResultChartsField{
@@ -34,6 +27,7 @@ public class ResultChartsField{
 
     public void CreateGraphics(LineChart resultChart){
         XYChart.Series<String,Double> invoicing = new XYChart.Series<>();
+        invoicing.setName("Evolução");
         for(ResultCharts resultCharts: listResultCharts){
             invoicing.getData().add(new XYChart.Data<>(resultCharts.getSellingDate().toString(),resultCharts.getTotalDate()));
         }
