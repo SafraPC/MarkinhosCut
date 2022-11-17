@@ -161,9 +161,22 @@ professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
 		   AND paymentName LIKE paymentNameParam GROUP BY sellingDate ORDER BY sellingDate ;
 	   END |
 
+
+DELIMITER |
+CREATE PROCEDURE getRegisterSelling (dateInitialParam VARCHAR(20) ,dateFinalParam VARCHAR(20),
+professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
+       BEGIN
+		   SELECT Selling.sellingId, Professional.professionalName, Selling.paymentName, Selling.total, Selling.sellingDate
+           FROM Selling INNER JOIN Professional using(cpf) WHERE
+		   sellingDate BETWEEN dateInitialParam AND dateFinalParam AND professionalName LIKE professionalNameParam
+		   AND paymentName LIKE paymentNameParam GROUP BY sellingDate ORDER BY sellingDate ;
+	   END |
+
 CALL getResultCharts("2022-11-16","2022-11-17","%Ma%","%Pix%");
 CALL getResultCharts('2022-11-13','2022-11-15','%%','%Pix%');
 
-CALL getResultCharts("2022-11-11","2022-11-16","%Marcos%","%Pix%")
+CALL getResultCharts("2022-11-11","2022-11-16","%%","%Pix%")
+
+CALL getRegisterSelling('2022-11-11','2022-11-16','%Marcos%','%%');
 
 SELECT * FROM Selling;
