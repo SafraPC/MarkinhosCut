@@ -59,6 +59,10 @@ INSERT INTO Service (price, serviceName, isActive) VALUES
 
 INSERT INTO PaymentMethod (paymentName) values
 ("Pix");
+INSERT INTO PaymentMethod (paymentName) values
+("Crédito"),
+("Débito"),
+("Dinheiro");
 
 INSERT INTO Selling (cpf, paymentName, total, sellingDate) values
 ("48663164890", "Pix", 0, '2020-03-01');
@@ -169,14 +173,5 @@ professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
 		   SELECT Selling.sellingId, Professional.professionalName, Selling.paymentName, Selling.total, Selling.sellingDate
            FROM Selling INNER JOIN Professional using(cpf) WHERE
 		   sellingDate BETWEEN dateInitialParam AND dateFinalParam AND professionalName LIKE professionalNameParam
-		   AND paymentName LIKE paymentNameParam GROUP BY sellingDate ORDER BY sellingDate ;
+		   AND paymentName LIKE paymentNameParam ORDER BY sellingDate ;
 	   END |
-
-CALL getResultCharts("2022-11-16","2022-11-17","%Ma%","%Pix%");
-CALL getResultCharts('2022-11-13','2022-11-15','%%','%Pix%');
-
-CALL getResultCharts("2022-11-11","2022-11-16","%%","%Pix%")
-
-CALL getRegisterSelling('2022-11-11','2022-11-16','%Marcos%','%%');
-
-SELECT * FROM Selling;
