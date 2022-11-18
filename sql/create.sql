@@ -1,0 +1,45 @@
+DROP DATABASE IF EXISTS MarkinhosCut;
+CREATE DATABASE MarkinhosCut;
+USE MarkinhosCut;
+
+CREATE TABLE Professional(
+professionalId INTEGER AUTO_INCREMENT PRIMARY KEY,
+cpf VARCHAR(11) NOT NULL UNIQUE,
+professionalName VARCHAR(100) NOT NULL UNIQUE,
+isActive BOOLEAN
+);
+
+CREATE TABLE PaymentMethod(
+paymentName VARCHAR(50) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE Selling(
+sellingId INTEGER AUTO_INCREMENT PRIMARY KEY,
+cpf VARCHAR(11) NOT NULL,
+paymentName VARCHAR(50) NOT NULL,
+total DOUBLE NOT NULL,
+sellingDate DATE NOT NULL,
+FOREIGN KEY (cpf) REFERENCES Professional (cpf),
+FOREIGN KEY (paymentName) REFERENCES PaymentMethod (paymentName)
+);
+
+CREATE TABLE Service(
+serviceId INTEGER AUTO_INCREMENT PRIMARY KEY,
+price DOUBLE NOT NULL,
+serviceName VARCHAR (100) NOT NULL,
+isActive BOOLEAN NOT NULL
+);
+
+CREATE TABLE qtdService(
+qtdId INTEGER AUTO_INCREMENT PRIMARY KEY,
+serviceId INTEGER NOT NULL,
+sellingId INTEGER NOT NULL,
+quantity INTEGER NOT NULL,
+price DOUBLE NOT NULL,
+FOREIGN KEY (serviceId) REFERENCES Service (serviceId),
+FOREIGN KEY (sellingId) REFERENCES Selling (sellingId)
+ON DELETE CASCADE
+);
+
+
+
