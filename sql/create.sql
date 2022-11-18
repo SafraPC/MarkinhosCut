@@ -41,5 +41,12 @@ FOREIGN KEY (sellingId) REFERENCES Selling (sellingId)
 ON DELETE CASCADE
 );
 
+CREATE TABLE biggestSellerMark(
+analyticsId INTEGER AUTO_INCREMENT PRIMARY KEY,
+analyticDate DATE NOT NULL,
+cpf VARCHAR(11) NOT NULL,
+FOREIGN KEY (cpf) REFERENCES Professional (cpf)
+ON DELETE CASCADE
+);
 
 
