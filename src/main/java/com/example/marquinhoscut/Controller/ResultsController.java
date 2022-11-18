@@ -58,6 +58,8 @@ public class ResultsController extends AdminBar {
 		PopulateOptionsResults();
 		handleWatch();
 
+		handleAddView();
+
 	}
 
 	private void handleWatch(){
@@ -126,20 +128,20 @@ public class ResultsController extends AdminBar {
 	@FXML
 	private void handleAddView() {
 		try{
+			queryResults();
 			String selectedView = CBview.getSelectionModel().getSelectedItem();
 			if(selectedView.equals("Linhas")){
 				gridPane.getChildren().clear();
 				System.out.println("entrei");
-				for(Selling selling : listRegisterSelling){
-					System.out.println(selling.getTotal());
+				for(Selling selling : listRegisterSelling) {
 					int id = selling.getSellingId();
 					String professional = selling.getProfessional();
 					String payment = selling.getpaymentName();
 					String date = selling.getSellingDate();
 					Double total = selling.getTotal();
-					handleAddRegister(id,professional, payment,date, total);
+					handleAddRegister(id, professional, payment, date, total);
 				}
-				queryResults();
+
 				return;
 			}
 			if(selectedView.equals("Gráfico")){
