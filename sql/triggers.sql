@@ -20,5 +20,3 @@ END IF;
 
 END
 $$
-
-SELECT * FROM Selling;
