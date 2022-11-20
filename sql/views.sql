@@ -10,4 +10,3 @@ ON biggestSellerMark.cpf = Professional.cpf;
 
 SELECT * FROM viewBiggestSellerMark;
 
-

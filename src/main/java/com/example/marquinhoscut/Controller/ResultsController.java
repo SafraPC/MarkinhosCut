@@ -81,7 +81,7 @@ public class ResultsController extends AdminBar {
 	}
 	
 	
-	private void handleCreateLineGraph(){
+	private void handleCreateGraph(){
 		try{
 			gridPane.getChildren().clear();
 			
@@ -102,8 +102,31 @@ public class ResultsController extends AdminBar {
 			DialogMessage.show("Erro ao adicionar seção!","Houve um erro ao adicionar uma nova seção!", Alert.AlertType.ERROR);
 			System.out.println(e.getMessage());
 		}
-		
 	}
+	
+	private void handleCreateLineGraph(){
+		gridPane.getChildren().clear();
+		System.out.println("AQ");
+		for(Selling selling : listRegisterSelling) {
+			int id = selling.getSellingId();
+			System.out.println("AQ2");
+			
+			String professional = selling.getProfessional();
+			String payment = selling.getpaymentName();
+			
+			if(professional == null || professional.equals("Todos")){
+				professional = "";
+			}
+			if(professional == null || professional.equals("Todos")){
+				professional = "";
+			}
+			
+			String date = selling.getSellingDate();
+			Double total = selling.getTotal();
+			handleAddRegister(id, professional, payment, date, total);
+		}
+	}
+	
 	public void handleAddRegister(int id, String professional, String payment, String date, Double total){
 
 		try{
@@ -131,24 +154,12 @@ public class ResultsController extends AdminBar {
 			queryResults();
 			String selectedView = CBview.getSelectionModel().getSelectedItem();
 			if(selectedView.equals("Linhas")){
-				gridPane.getChildren().clear();
-				System.out.println("entrei");
-				for(Selling selling : listRegisterSelling) {
-					int id = selling.getSellingId();
-					String professional = selling.getProfessional();
-					String payment = selling.getpaymentName();
-					String date = selling.getSellingDate();
-					Double total = selling.getTotal();
-					handleAddRegister(id, professional, payment, date, total);
-				}
-
-				return;
-			}
-			if(selectedView.equals("Gráfico")){
 				this.handleCreateLineGraph();
 				return;
 			}
-			this.handleCreateLineGraph();
+			if(selectedView.equals("Gráfico")){
+				this.handleCreateGraph();
+			}
 		}catch (Exception err){
 			System.out.println(err.getMessage());
 		}
@@ -158,6 +169,9 @@ public class ResultsController extends AdminBar {
 	public void PopulateOptionsResults(){
 
 		try{
+			CBbarber.getItems().add("Todos");
+			CBPaymentMethod.getItems().add("Todos");
+			
 			datePickerInitial.setValue(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()));
 			datePickerEnd.setValue(LocalDate.now());
 
@@ -190,10 +204,22 @@ public class ResultsController extends AdminBar {
 			System.out.println("hello");
 			SellingDao sellingDao = new SellingDao();
 			listRegisterSelling.clear();
-			listRegisterSelling.addAll(sellingDao.getListSelling(datePickerInitial.getValue().toString(),
-					datePickerEnd.getValue().toString(),
-					CBbarber.getSelectionModel().getSelectedItem(),
-					CBPaymentMethod.getSelectionModel().getSelectedItem()));
+			
+			
+			String dateInitial = datePickerInitial.getValue().toString();
+			String dateFinal = datePickerEnd.getValue().toString();
+			String selectedBarber = CBbarber.getSelectionModel().getSelectedItem();
+			String selectedPaymentMethod = CBPaymentMethod.getSelectionModel().getSelectedItem();
+			
+			if(selectedBarber == null || selectedBarber.equals("Todos")){
+				selectedBarber = "";
+			}
+			if(selectedPaymentMethod == null || selectedPaymentMethod.equals("Todos")){
+				selectedPaymentMethod = "";
+			}
+			
+			listRegisterSelling.addAll(sellingDao.getListSelling(dateInitial,dateFinal,
+					selectedBarber,selectedPaymentMethod));
 		}catch (Exception err){
 			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar uma nova registros!", Alert.AlertType.ERROR);
 			System.out.println(err);

@@ -14,14 +14,18 @@ public class ResultChartsDao {
     ResultSet result;
     Statement statement ;
 
-    public ArrayList<ResultCharts> getListTotalDay(String dateInitial, String dateFinal, String professsional, String paymentMethod) throws SQLException {
+    public ArrayList<ResultCharts> getListTotalDay(String dateInitial, String dateFinal, String professional, String paymentMethod) throws SQLException {
         ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
         connection = DatabaseConnection.getConnection();
         statement = connection.createStatement();
         try {
-            professsional = professsional != null ? professsional : "";
-            paymentMethod = paymentMethod != null ? paymentMethod : "";
-            String query = "CALL getResultCharts('"+dateInitial+"','"+dateFinal+"','%"+professsional+"%','%"+paymentMethod+"%');";
+            if(professional == null || professional.equals("Todos")){
+                professional = "";
+            }
+            if(paymentMethod == null || paymentMethod.equals("Todos")){
+                paymentMethod = "";
+            }
+            String query = "CALL getResultCharts('"+dateInitial+"','"+dateFinal+"','%"+professional+"%','%"+paymentMethod+"%');";
             result = statement.executeQuery(query);
             ResultCharts resultCharts;
             while (result.next()) {
