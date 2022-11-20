@@ -25,6 +25,7 @@ public class ResultChartsDao {
             if(paymentMethod == null || paymentMethod.equals("Todos")){
                 paymentMethod = "";
             }
+            
             String query = "CALL getResultCharts('"+dateInitial+"','"+dateFinal+"','%"+professional+"%','%"+paymentMethod+"%');";
             result = statement.executeQuery(query);
             ResultCharts resultCharts;
@@ -39,4 +40,6 @@ public class ResultChartsDao {
         }
         return listResultCharts;
     }
+    
+    
 }

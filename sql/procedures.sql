@@ -105,10 +105,7 @@ DELIMITER |
 CREATE PROCEDURE getRegisterSellingDetailed (dateInitialParam VARCHAR(20) ,dateFinalParam VARCHAR(20),
 professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
        BEGIN
-			SELECT Selling.sellingId,Service.serviceName,qtdService.price,qtdService.quantity,
-			Professional.professionalName, 
-			Selling.paymentName, Selling.sellingDate
-			FROM Selling INNER JOIN Professional USING(cpf)
+			SELECT * FROM Selling INNER JOIN Professional USING(cpf)
 			INNER JOIN qtdService USING(sellingId)
 			INNER JOIN Service USING(serviceId)
 			WHERE sellingDate BETWEEN dateInitialParam AND dateFinalParam AND professionalName LIKE professionalNameParam
@@ -116,10 +113,10 @@ professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
 			ORDER BY Selling.sellingDate ;
 	   END |
        
-
+SELECT * FROM Selling;
        
 	
-       
+       CALL getRegisterSellingDetailed('2022-11-01','2022-11-20','%%','%%');
        
 
            

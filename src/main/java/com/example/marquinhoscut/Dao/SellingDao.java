@@ -76,15 +76,43 @@ public class SellingDao extends CallDatabase {
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
             Logger.getLogger(SellingDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("teste");
         } finally {
             connection.close();
         }
-        for(Selling selling : listSelling){
-            System.out.println(selling.getSellingId());
+        return listSelling;
+    }
+    
+    public ArrayList<Selling> getDetailedListSelling(String dateInitial, String dateFinal, String professsional, String paymentMethod) throws SQLException {
+        ArrayList<Selling> listSelling = new ArrayList<>();
+        connection = DatabaseConnection.getConnection();
+        statement = connection.createStatement();
+        try {
+            professsional = professsional != null ? professsional : "";
+            paymentMethod = paymentMethod != null ? paymentMethod : "";
+            String query = "CALL getRegisterSellingDetailed('"+dateInitial+"','"+dateFinal+"','%"+professsional+"%','%"+paymentMethod+"%');";
+            System.out.println(query);
+            result = statement.executeQuery(query);
+            Selling selling;
+            while (result.next()) {
+                selling = new Selling(result.getInt("sellingId"),
+                        result.getString("professionalName"),
+                        result.getString("paymentName"),
+                        result.getDate("sellingDate"),
+                        result.getString("serviceName"),
+                        result.getDouble("price"),
+                        result.getInt("quantity"));
+                listSelling.add(selling);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("AQUI???");
+            System.out.println(ex.getMessage());
+            Logger.getLogger(SellingDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            connection.close();
         }
         return listSelling;
     }
+    
 }
