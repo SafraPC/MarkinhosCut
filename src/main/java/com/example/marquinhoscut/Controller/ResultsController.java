@@ -87,7 +87,6 @@ public class ResultsController extends AdminBar {
 	private void handleCreateGraph(){
 		try{
 			gridPane.getChildren().clear();
-			
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resultChartsField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
@@ -109,10 +108,9 @@ public class ResultsController extends AdminBar {
 	
 	private void handleCreateLineGraph(){
 		gridPane.getChildren().clear();
-		System.out.println("AQ");
-		for(int i = 0; i< listRegisterSelling.size();i++) {
+		
+		for(int i = 0; i < listRegisterSelling.size();i++) {
 			int id = listRegisterSelling.get(i).getSellingId();
-			System.out.println("AQ2");
 			
 			String professional = listRegisterSelling.get(i).getProfessional();
 			String payment = listRegisterSelling.get(i).getpaymentName();
@@ -159,6 +157,7 @@ public class ResultsController extends AdminBar {
 	private void handleAddView() {
 		try{
 			queryResults();
+			toReceive.setText(this.sumtotal());
 			String selectedView = CBview.getSelectionModel().getSelectedItem();
 			if(selectedView.equals("Linhas")){
 				this.handleCreateLineGraph();
@@ -232,12 +231,13 @@ public class ResultsController extends AdminBar {
 		}
 
 	}
-	public String Sumtotal(){
+	public String sumtotal(){
 		try {
 			double sumTotal=0;
 			for(Selling selling:listRegisterSelling){
-				sumTotal+= selling.getTotal();
-				System.out.println(selling.getSellingDate());
+				if(selling.getTotal() > 0){
+					sumTotal += selling.getTotal();
+				}
 			}
 			return NumberFormat.getCurrencyInstance().format(sumTotal);
 		}catch(Exception err){
