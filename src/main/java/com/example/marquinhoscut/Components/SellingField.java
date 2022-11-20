@@ -80,10 +80,11 @@ public class SellingField {
 	public void editValue(){
 		if(priceField.isEditable()){
 			priceField.setEditable(false);
+			priceField.setStyle("-fx-background-color: #e0dcdc; -fx-border-color: #CCC1C1; -fx-border-radius: 2px");
+			return;
 		}
-		else{
 			priceField.setEditable(true);
-		}
+			priceField.setStyle("-fx-background-color: white; -fx-border-color: #CCC1C1; -fx-border-radius: 2px");
 	}
 
 	public void handleDelete() {

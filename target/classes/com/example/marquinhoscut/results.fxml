@@ -67,7 +67,7 @@
          </font>
       </Label>
       <DatePicker fx:id="datePickerEnd" layoutX="194.0" layoutY="93.0" onAction="#handleAddView" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
-      <ChoiceBox fx:id="CBbarber" layoutX="358.0"  layoutY="93.0" onAction="#handleAddView" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
+      <ChoiceBox fx:id="CBbarber" layoutX="358.0" layoutY="93.0" onAction="#handleAddView" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: white; -fx-border-color: CCC1C1; -fx-border-radius: 2px;" />
       <Label layoutX="362.0" layoutY="67.0" opacity="0.8" text="Barbeiro">
          <font>
             <Font size="14.0" />
@@ -90,7 +90,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="toReceive" layoutX="80.0" layoutY="160.0" opacity="0.8" prefHeight="20.0" prefWidth="98.0" text="R$18.000" textFill="#25fc04">
+      <Label fx:id="toReceive" layoutX="84.0" layoutY="164.0" opacity="0.8" prefHeight="20.0" prefWidth="98.0" textFill="#25fc04">
          <font>
             <Font size="18.0" />
          </font>
