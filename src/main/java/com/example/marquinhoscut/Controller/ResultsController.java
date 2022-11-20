@@ -20,7 +20,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 import java.sql.SQLOutput;
@@ -107,12 +110,12 @@ public class ResultsController extends AdminBar {
 	private void handleCreateLineGraph(){
 		gridPane.getChildren().clear();
 		System.out.println("AQ");
-		for(Selling selling : listRegisterSelling) {
-			int id = selling.getSellingId();
+		for(int i = 0; i< listRegisterSelling.size();i++) {
+			int id = listRegisterSelling.get(i).getSellingId();
 			System.out.println("AQ2");
 			
-			String professional = selling.getProfessional();
-			String payment = selling.getpaymentName();
+			String professional = listRegisterSelling.get(i).getProfessional();
+			String payment = listRegisterSelling.get(i).getpaymentName();
 			
 			if(professional == null || professional.equals("Todos")){
 				professional = "";
@@ -120,31 +123,35 @@ public class ResultsController extends AdminBar {
 			if(professional == null || professional.equals("Todos")){
 				professional = "";
 			}
-			
-			String date = selling.getSellingDate();
-			Double total = selling.getTotal();
-			handleAddRegister(id, professional, payment, date, total);
+			boolean isOdd = i%2 == 0 ? true : false;
+			String date = listRegisterSelling.get(i).getSellingDate();
+			Double total = listRegisterSelling.get(i).getTotal();
+			handleAddRegister(id, professional, payment, date, total,isOdd);
 		}
 	}
 	
-	public void handleAddRegister(int id, String professional, String payment, String date, Double total){
+	public void handleAddRegister(int id, String professional, String payment, String date, Double total,boolean isOdd){
 
 		try{
-			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegisterSellingField.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("registerSellingField.fxml"));
 			AnchorPane scene = fxmlLoader.load();
 			AnchorPane ap = scene;
 			RegisterSellingField controller = fxmlLoader.getController();
-			controller.setId(id);
+			
+			if(isOdd){
+				ap.setStyle("-fx-background-color: #f5f5f5");
+			}
+			
 			controller.setProfessional(professional);
 			controller.setPayment(payment);
 			controller.setDate(date);
 			controller.setTotal(total);
 			controllers.add(controller);
-
+		
 			gridPane.add(ap, 0, gridPane.getRowCount());
 		}catch(Exception err){
-			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar uma nova registros!", Alert.AlertType.ERROR);
 			System.out.println(err.getMessage());
+			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar um novo registro!", Alert.AlertType.ERROR);
 		}
 
 	}
@@ -201,7 +208,6 @@ public class ResultsController extends AdminBar {
 	}
 	private void queryResults() throws SQLException {
 		try {
-			System.out.println("hello");
 			SellingDao sellingDao = new SellingDao();
 			listRegisterSelling.clear();
 			
@@ -221,7 +227,7 @@ public class ResultsController extends AdminBar {
 			listRegisterSelling.addAll(sellingDao.getListSelling(dateInitial,dateFinal,
 					selectedBarber,selectedPaymentMethod));
 		}catch (Exception err){
-			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar uma nova registros!", Alert.AlertType.ERROR);
+			DialogMessage.show("Erro ao adicionar registros!","Houve um erro ao adicionar um novo registro!", Alert.AlertType.ERROR);
 			System.out.println(err);
 		}
 

@@ -15,19 +15,14 @@ import java.util.ArrayList;
 public class RegisterSellingField {
 
     @FXML
-    private Label paymentMethod, professionalSelling, sellingDate, sellingId, totalSelling;
+    private Label paymentMethod, professionalSelling, sellingDate, totalSelling;
 
     private String payment, professional, date;
-    int id;
 
     double total;
 
 
 
-    public void setId(int id){
-        this.id = id;
-        this.sellingId.setText(Integer.toString(id));
-    }
 
     public void setProfessional(String professional) {
         this.professional = professional;

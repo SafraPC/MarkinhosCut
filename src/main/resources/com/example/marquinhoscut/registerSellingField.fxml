@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="5.0" prefWidth="740" style="-fx-background-color: D9D9D9;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.marquinhoscut.Components.RegisterSellingField">
+   <children>
+      <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="99.0" text="Profissional:" />
+      <Label fx:id="professionalSelling" layoutX="113.0" layoutY="5.0" prefHeight="18.0" prefWidth="106.0" text="Marcos" />
+      <Label layoutX="209.0" layoutY="5.0" prefHeight="18.0" prefWidth="106.0" text="Pagamento:" />
+      <Label fx:id="paymentMethod" layoutX="315.0" layoutY="5.0" prefHeight="18.0" prefWidth="74.0" text="Pix" />
+      <Label layoutX="402.0" layoutY="5.0" prefHeight="18.0" prefWidth="67.0" text="Total:" />
+      <Label fx:id="totalSelling" layoutX="469.0" layoutY="5.0" prefHeight="18.0" prefWidth="74.0" text="50.00" />
+      <Label layoutX="570.0" layoutY="5.0" prefHeight="18.0" prefWidth="59.0" text="Data:" />
+      <Label fx:id="sellingDate" layoutX="629.0" layoutY="5.0" prefHeight="18.0" prefWidth="86.0" text="15/11/2022" />
+      <Separator layoutY="23.0" prefHeight="5.0" prefWidth="740.0" />
+   </children>
+</AnchorPane>
