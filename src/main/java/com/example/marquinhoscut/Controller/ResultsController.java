@@ -11,6 +11,7 @@ import com.example.marquinhoscut.Dao.SellingDao;
 import com.example.marquinhoscut.Model.PaymentMethod;
 import com.example.marquinhoscut.Model.Professional;
 import com.example.marquinhoscut.Model.Selling;
+import com.example.marquinhoscut.Model.SellingDetailed;
 import com.example.marquinhoscut.Utils.Bar.AdminBar;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import javafx.fxml.FXML;
@@ -31,6 +32,7 @@ public class ResultsController extends AdminBar {
 	private ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
 
 	ArrayList<Selling> listRegisterSelling = new ArrayList<>();
+	ArrayList<SellingDetailed> listRegisterSellingDetailed= new ArrayList<>();
 
 	@FXML
 	private GridPane gridPane;
@@ -98,7 +100,7 @@ public class ResultsController extends AdminBar {
 	
 	private void handleCreateLineGraph(){
 		gridPane.getChildren().clear();
-		
+
 		for(int i = 0; i < listRegisterSelling.size();i++) {
 			int id = listRegisterSelling.get(i).getSellingId();
 			
@@ -111,7 +113,7 @@ public class ResultsController extends AdminBar {
 			if(payment == null || payment.equals("Todos")){
 				professional = "";
 			}
-			boolean isOdd = i%2 == 0 ? true : false;
+			boolean isOdd = i%2 == 0 ? false : true;
 			String date = listRegisterSelling.get(i).getSellingDate();
 			Double total = listRegisterSelling.get(i).getTotal();
 			handleAddRegister(id, professional, payment, date, total,isOdd);
@@ -120,13 +122,13 @@ public class ResultsController extends AdminBar {
 	
 	private void handleCreateLineDetailedGraph(){
 		gridPane.getChildren().clear();
-		
-		for(int i = 0; i < listRegisterSelling.size();i++) {
-			int id = listRegisterSelling.get(i).getSellingId();
-			String name = listRegisterSelling.get(i).getServiceName();
-			int qtd = listRegisterSelling.get(i).getQuantity();
-			String professional = listRegisterSelling.get(i).getProfessional();
-			String payment = listRegisterSelling.get(i).getpaymentName();
+
+		for(int i = 0; i < listRegisterSellingDetailed.size();i++) {
+			int id = listRegisterSellingDetailed.get(i).getSellingId();
+			String name = listRegisterSellingDetailed.get(i).getServiceName();
+			int qtd = listRegisterSellingDetailed.get(i).getQuantity();
+			String professional = listRegisterSellingDetailed.get(i).getProfessional();
+			String payment = listRegisterSellingDetailed.get(i).getpaymentName();
 			
 			if(professional == null || professional.equals("Todos")){
 				professional = "";
@@ -135,9 +137,10 @@ public class ResultsController extends AdminBar {
 				professional = "";
 			}
 			
-			boolean isOdd = i%2 == 0 ? true : false;
-			String date = listRegisterSelling.get(i).getSellingDate();
-			Double total = listRegisterSelling.get(i).getTotal();
+			boolean isOdd = i%2 == 0 ? false : true;
+			String date = listRegisterSellingDetailed.get(i).getSellingDate();
+			Double total = listRegisterSellingDetailed.get(i).getProductPrice();
+
 			handleAddDetailedRegister(id, professional, payment, date, total,name,qtd,isOdd);
 		}
 	}
@@ -176,7 +179,7 @@ public class ResultsController extends AdminBar {
 			RegisterSellingDetailedField controller = fxmlLoader.getController();
 			
 			if(isOdd){
-				ap.setStyle("-fx-background-color: #f5f5f5");
+				ap.setStyle("-fx-background-color: #FFF");
 			}
 			
 			controller.setProfessional(professional);
@@ -242,7 +245,6 @@ public class ResultsController extends AdminBar {
 			
 
 		}catch(Exception err){
-			System.out.println("hm?");
 			System.out.println(err.getMessage());
 		}
 		
@@ -259,6 +261,7 @@ public class ResultsController extends AdminBar {
 		try {
 			SellingDao sellingDao = new SellingDao();
 			listRegisterSelling.clear();
+			listRegisterSellingDetailed.clear();
 			
 			
 			String dateInitial = datePickerInitial.getValue().toString();
@@ -273,10 +276,8 @@ public class ResultsController extends AdminBar {
 			if(selectedPaymentMethod == null || selectedPaymentMethod.equals("Todos")){
 				selectedPaymentMethod = "";
 			}
-			System.out.println("a: "+selectedBarber);
-			System.out.println("b: "+selectedPaymentMethod);
 			if(selectedView.equals("Detalhes")){
-				listRegisterSelling.addAll(sellingDao.getDetailedListSelling(dateInitial,dateFinal,
+				listRegisterSellingDetailed.addAll(sellingDao.getDetailedListSelling(dateInitial,dateFinal,
 						selectedBarber, selectedPaymentMethod));
 				return;
 			}
@@ -291,17 +292,31 @@ public class ResultsController extends AdminBar {
 	public String sumtotal(){
 		try {
 			double sumTotal=0;
+			if(CBview.getSelectionModel().getSelectedItem() == null){
+				return NumberFormat.getCurrencyInstance().format(sumTotal);
+			}
+			if(CBview.getSelectionModel().getSelectedItem().equals("Detalhes")){
+				for(SellingDetailed selling:listRegisterSellingDetailed){
+					if(selling.getProductPrice() > 0){
+						sumTotal += selling.getProductPrice();
+					}
+				}
+				return NumberFormat.getCurrencyInstance().format(sumTotal);
+			}
 			for(Selling selling:listRegisterSelling){
 				if(selling.getTotal() > 0){
 					sumTotal += selling.getTotal();
 				}
 			}
 			return NumberFormat.getCurrencyInstance().format(sumTotal);
+
 		}catch(Exception err){
 		System.out.println(err.getMessage());
 		return "";
 		}
 
 	}
+
+
 
 }

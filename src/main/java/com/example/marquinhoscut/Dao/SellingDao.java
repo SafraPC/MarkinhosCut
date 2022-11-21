@@ -3,6 +3,7 @@ package com.example.marquinhoscut.Dao;
 import com.example.marquinhoscut.Model.PaymentMethod;
 import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Model.Selling;
+import com.example.marquinhoscut.Model.SellingDetailed;
 import com.example.marquinhoscut.ServicesDB.CallDatabase;
 import com.example.marquinhoscut.ServicesDB.DatabaseConnection;
 import com.example.marquinhoscut.Utils.DbValidation.MySQLValidation;
@@ -83,8 +84,8 @@ public class SellingDao extends CallDatabase {
         return listSelling;
     }
     
-    public ArrayList<Selling> getDetailedListSelling(String dateInitial, String dateFinal, String professsional, String paymentMethod) throws SQLException {
-        ArrayList<Selling> listSelling = new ArrayList<>();
+    public ArrayList<SellingDetailed> getDetailedListSelling(String dateInitial, String dateFinal, String professsional, String paymentMethod) throws SQLException {
+        ArrayList<SellingDetailed> listSelling = new ArrayList<>();
         connection = DatabaseConnection.getConnection();
         statement = connection.createStatement();
         try {
@@ -93,18 +94,17 @@ public class SellingDao extends CallDatabase {
             String query = "CALL getRegisterSellingDetailed('"+dateInitial+"','"+dateFinal+"','%"+professsional+"%','%"+paymentMethod+"%');";
             System.out.println(query);
             result = statement.executeQuery(query);
-            Selling selling;
             while (result.next()) {
-                selling = new Selling(result.getInt("sellingId"),
+                System.out.println("entquanto..");
+                listSelling.add(new SellingDetailed(result.getInt("sellingId"),
                         result.getString("professionalName"),
                         result.getString("paymentName"),
                         result.getDate("sellingDate"),
                         result.getString("serviceName"),
                         result.getDouble("price"),
-                        result.getInt("quantity"));
-                listSelling.add(selling);
+                        result.getInt("quantity")));
             }
-            
+            System.out.println("adicionou td");
         } catch (SQLException ex) {
             System.out.println("AQUI???");
             System.out.println(ex.getMessage());

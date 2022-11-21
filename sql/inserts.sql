@@ -23,15 +23,3 @@ INSERT INTO PaymentMethod (paymentName) values
 ("Débito"),
 ("Dinheiro");
 
-INSERT INTO Selling (cpf, paymentName, total, sellingDate) values
-("48663164890", "Pix", 0, '2020-03-01'),
-("55698877455", "Pix", 30, '2022-11-19'),
-("55698877455", "Pix", 30, '2022-11-19'),
-("55698877455", "Pix", 30, '2022-11-19');
-
-insert into qtdService ( sellingId, serviceId,quantity,price) values
-(1, 1, 2, 10.0),
-(2, 1, 2, 10.0),
-(3, 1, 2, 10.0),
-(4, 1, 2, 10.0),
-(1, 2, 3, 10.0);

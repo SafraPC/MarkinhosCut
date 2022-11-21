@@ -120,5 +120,5 @@ SELECT * FROM Selling;
        
 
            
-
+CALL getRegisterSellingDetailed('2022-11-01','2022-11-20','%%','%%');
 		
