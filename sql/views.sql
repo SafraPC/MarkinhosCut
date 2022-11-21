@@ -10,3 +10,12 @@ ON biggestSellerMark.cpf = Professional.cpf;
 
 SELECT * FROM viewBiggestSellerMark;
 
+CREATE VIEW viewProfessionalSeller AS
+SELECT Professional.professionalName, Service.serviceName, Selling.total, Selling.sellingDate
+FROM Selling INNER JOIN Professional USING(cpf)
+INNER JOIN qtdService USING(sellingId)
+INNER JOIN Service USING(serviceId)
+ORDER BY Selling.sellingDate;
+
+SELECT * FROM viewProfessionalSeller;
+
