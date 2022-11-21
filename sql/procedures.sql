@@ -115,10 +115,3 @@ professionalNameParam VARCHAR(50),paymentNameParam VARCHAR(50))
        
 SELECT * FROM Selling;
        
-	
-       CALL getRegisterSellingDetailed('2022-11-01','2022-11-20','%%','%%');
-       
-
-           
-CALL getRegisterSellingDetailed('2022-11-01','2022-11-20','%%','%%');
-		
