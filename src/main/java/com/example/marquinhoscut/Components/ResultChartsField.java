@@ -5,11 +5,13 @@ import com.example.marquinhoscut.Dao.ResultChartsDao;
 
 import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
+import com.example.marquinhoscut.Utils.Hover;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
@@ -26,12 +28,21 @@ public class ResultChartsField{
     ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
 
     public void CreateGraphics(LineChart resultChart){
-        XYChart.Series<String,Double> invoicing = new XYChart.Series<>();
-        invoicing.setName("Evolução");
-        for(ResultCharts resultCharts: listResultCharts){
-            invoicing.getData().add(new XYChart.Data<>(resultCharts.getSellingDate().toString(),resultCharts.getTotalDate()));
+        try{
+            XYChart.Series<String,Double> invoicing = new XYChart.Series<>();
+            invoicing.setName("Evolução");
+            for(ResultCharts resultCharts: listResultCharts){
+                invoicing.getData().add(new XYChart.Data<>(resultCharts.getSellingDate().toString(),resultCharts.getTotalDate()));
+            }
+            for(int i = 0; i < invoicing.getData().stream().count(); i++){
+                invoicing.getData().get(i).setNode(new Hover(i,Integer.parseInt(String.format("%.0f"
+                        , invoicing.getData().get(i).getYValue()))));
+            }
+            resultChart.getData().addAll(invoicing);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-        resultChart.getData().addAll(invoicing);
+
     }
     
     public void createGraph(String initialDate, String finalDate, String professional, String paymentMethod){

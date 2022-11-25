@@ -55,7 +55,9 @@ public class SellingField {
 			ServiceDao sDao = new ServiceDao();
 			listServices.addAll(sDao.getListServices());
 			for(Services service : listServices){
-				serviceCB.getItems().add(service.getName());
+				if(service.getIsActive()) {
+					serviceCB.getItems().add(service.getName());
+				}
 			}
 			serviceCB.setTooltip(new Tooltip("Selecione um serviço"));
 		}catch(Exception err){
