@@ -4,18 +4,22 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 import java.util.Date;
 
-public class ResultCharts {
+import com.example.marquinhoscut.Interfaces.ChartModel;
+
+public class ResultCharts implements ChartModel {
     private Date sellingDate;
     private Double totalDate;
 
-    public ResultCharts(Double totalDate,Date sellingDate){
+    public ResultCharts(Double totalDate, Date sellingDate) {
         this.totalDate = new SimpleDoubleProperty(totalDate).get();
         this.sellingDate = sellingDate;
     }
-    public Date getSellingDate(){
+
+    public Date getSellingDate() {
         return sellingDate;
     }
-    public Double getTotalDate(){
+
+    public Double getTotalDate() {
         return totalDate;
     }
 

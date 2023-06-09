@@ -3,6 +3,7 @@ package com.example.marquinhoscut.Components;
 
 import com.example.marquinhoscut.Dao.ResultChartsDao;
 
+import com.example.marquinhoscut.Interfaces.ChartModel;
 import com.example.marquinhoscut.Model.ResultCharts;
 import com.example.marquinhoscut.Utils.Dialog.DialogMessage;
 import com.example.marquinhoscut.Utils.Hover;
@@ -25,13 +26,13 @@ public class ResultChartsField{
     private NumberAxis Value;
     
     private String initialDate, finalDate, professionalName, paymentName;
-    ArrayList<ResultCharts> listResultCharts = new ArrayList<>();
+    ArrayList<ChartModel> listResultCharts = new ArrayList<>();
 
     public void CreateGraphics(LineChart resultChart){
         try{
             XYChart.Series<String,Double> invoicing = new XYChart.Series<>();
             invoicing.setName("Evolução");
-            for(ResultCharts resultCharts: listResultCharts){
+            for(ChartModel resultCharts: listResultCharts){
                 invoicing.getData().add(new XYChart.Data<>(resultCharts.getSellingDate().toString(),resultCharts.getTotalDate()));
             }
             for(int i = 0; i < invoicing.getData().stream().count(); i++){
